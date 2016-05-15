@@ -1,7 +1,6 @@
 package fragment;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +11,19 @@ import com.example.administrator.myall.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
-
+public class HomeFragment extends BaseFragment {
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
 
+
+
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View initView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
