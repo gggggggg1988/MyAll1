@@ -10,7 +10,6 @@ int attr pstsTextAllCaps 0x7f01000a
 int attr pstsUnderlineColor 0x7f010001
 int attr pstsUnderlineHeight 0x7f010004
 int color background_tab_pressed 0x7f030000
-int color tab_indicator_selected 0x7f030001
 int drawable background_tab 0x7f020000
 int[] styleable PagerSlidingTabStrip { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a }
 int styleable PagerSlidingTabStrip_pstsDividerColor 2

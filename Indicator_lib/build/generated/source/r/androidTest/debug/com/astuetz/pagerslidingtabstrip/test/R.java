@@ -109,7 +109,6 @@ containing a value of this type.
     }
     public static final class color {
         public static final int background_tab_pressed=0x7f030000;
-        public static final int tab_indicator_selected=0x7f030001;
     }
     public static final class drawable {
         public static final int background_tab=0x7f020000;
