@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView5"/>
+
+    <LinearLayout
+        android:id="@+id/ll_pic"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_marginRight="10dp"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="95dp"
+            android:id="@+id/imageView4"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            android:layout_height="95dp"
+            android:id="@+id/imageView5"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            android:layout_height="95dp"
+            android:id="@+id/imageView6"/>
+    </LinearLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <TextView
+           android:layout_marginLeft="15dp"
+           android:layout_width="wrap_content"
+           android:text="from"
+           android:layout_height="wrap_content"/>
+       <TextView
+            android:layout_alignParentRight="true"
+           android:layout_marginRight="15dp"
+           android:layout_width="wrap_content"
+           android:text="pinglun"
+           android:layout_height="wrap_content"/>
+   </RelativeLayout>
+</LinearLayout>
