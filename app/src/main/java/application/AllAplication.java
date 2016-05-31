@@ -21,6 +21,7 @@ public class AllAplication extends Application {
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(getApplicationContext());
+
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this)
                 .memoryCacheExtraOptions(480, 800) // default = device screen dimensions
                 .discCacheExtraOptions(480, 800, Bitmap.CompressFormat.JPEG, 75, null)
