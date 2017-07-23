@@ -3,7 +3,7 @@
     package="com.jeremyfeinstein.slidingmenu.lib.test" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="23" />
 
     <instrumentation
@@ -12,6 +12,10 @@
         android:handleProfiling="false"
         android:label="Tests for com.jeremyfeinstein.slidingmenu.lib.test"
         android:targetPackage="com.jeremyfeinstein.slidingmenu.lib.test" />
+
+    <meta-data
+        android:name="android.support.VERSION"
+        android:value="25.3.1" />
 
     <application>
         <uses-library android:name="android.test.runner" />

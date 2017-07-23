@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="fragment.homefragment.TechFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.aspsine.irecyclerview.IRecyclerView
+        app:loadMoreEnabled="true"
+        android:id="@+id/iRecyclerView"
+        app:loadMoreFooterLayout="@layout/layout_irecyclerview_load_more_footer"
+        app:refreshEnabled="true"
+        app:refreshHeaderLayout="@layout/layout_irecyclerview_refresh_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

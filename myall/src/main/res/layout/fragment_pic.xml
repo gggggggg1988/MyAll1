@@ -1,0 +1,22 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:fresco="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/fragment_pic"
+             tools:context="fragment.PicFragment">
+
+    <!--<ImageView
+        android:id="@+id/my_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />-->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/my_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        fresco:progressBarImage="@android:drawable/ic_menu_rotate"
+        fresco:placeholderImage="@mipmap/ic_launcher"
+        />
+
+</FrameLayout>

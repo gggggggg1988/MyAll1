@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Demo/Demo.iml" filepath="$PROJECT_DIR$/Demo/Demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/Indicator_lib/Indicator_lib.iml" filepath="$PROJECT_DIR$/Indicator_lib/Indicator_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyAll.iml" filepath="$PROJECT_DIR$/MyAll.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SeatTable/SeatTable.iml" filepath="$PROJECT_DIR$/SeatTable/SeatTable.iml" />
       <module fileurl="file://$PROJECT_DIR$/SlidingMenu_lib/SlidingMenu_lib.iml" filepath="$PROJECT_DIR$/SlidingMenu_lib/SlidingMenu_lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biaobai/biaobai.iml" filepath="$PROJECT_DIR$/biaobai/biaobai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myall/myall.iml" filepath="$PROJECT_DIR$/myall/myall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluginstandard/pluginstandard.iml" filepath="$PROJECT_DIR$/pluginstandard/pluginstandard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recyclerview-swipe/recyclerview-swipe.iml" filepath="$PROJECT_DIR$/recyclerview-swipe/recyclerview-swipe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recyclerviewstudy/recyclerviewstudy.iml" filepath="$PROJECT_DIR$/recyclerviewstudy/recyclerviewstudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" filepath="$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" />
     </modules>
   </component>
 </project>
