@@ -3,9 +3,7 @@ package fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,7 +46,7 @@ SimpleDraweeView draweeView;
                 .build();
         draweeView.setController(controller);
         GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(getResources()).setFadeDuration(2000)
-                                               .setBackground(mActivity.getDrawable(R.mipmap.mv1)).setFailureImage(mActivity.getDrawable(R.mipmap.mv2))
+                                               .setBackground(getActivity().getResources().getDrawable(R.mipmap.mv1)).setFailureImage(getActivity().getResources().getDrawable(R.mipmap.mv2))
                 .build();
         //draweeView.setController(controller);
         draweeView.setOnClickListener(this);
