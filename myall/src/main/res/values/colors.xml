@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorMenu">#415953</color>
+
+    <!--按钮文字颜色-->
+    <color name="colorNomal">#fbfffa</color>
+    <color name="colorSelected">#c01f15</color>
+    <color name="background">#d3e2ce</color>
+    <!--背景颜色-->
+    <color name="light_gray">#8c9ea5</color>
+
+
+
+
+
+        <color name="red_normal">#FF0000</color>
+        <color name="red_pressed">#FF6666</color>
+        <color name="green_normal">#37C000</color>
+        <color name="green_pressed">#30A070</color>
+        <color name="purple_normal">#9932CC</color>
+        <color name="purple_pressed">#9F79EE</color>
+
+        <color name="white">#FFFFFFFF</color>
+        <color name="white_pressed">#FFCFCFCF</color>
+
+</resources>

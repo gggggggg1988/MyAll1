@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"  tools:context=".MainActivity">
+    <include layout="@layout/include_title_bar"></include>
+
+
+    <FrameLayout
+        android:id="@+id/content_container"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <!--<widget.NoScrollViewPager android:id="@+id/home_viewpager" android:layout_width="match_parent"-->
+                                  <!--android:layout_height="match_parent">-->
+
+        <!--</widget.NoScrollViewPager>-->
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/button_group"
+        android:background="@color/light_gray"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/rb1"
+            android:text="@string/main_page"
+            android:focusable="true"
+            android:drawableTop="@drawable/tab_home"
+            style="@style/RadiobutonStyle" />
+        <Button
+            android:id="@+id/rb2"
+            android:text="@string/video"
+            android:drawableTop="@drawable/tab_gov"
+            style="@style/RadiobutonStyle"/>
+        <Button
+            android:id="@+id/rb3"
+            android:text="@string/picture"
+            android:drawableTop="@drawable/tab_news"
+            style="@style/RadiobutonStyle" />
+        <Button
+            android:id="@+id/rb4"
+            android:text="@string/mine"
+            android:drawableTop="@drawable/tab_setting"
+            style="@style/RadiobutonStyle"/>
+    </LinearLayout>
+
+
+</LinearLayout>
