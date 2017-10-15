@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:name="application.AllAplication"
@@ -76,6 +77,27 @@
         <activity android:name=".ContentActivity">
         </activity>
         <activity android:name=".AgentWebviewTest">
+        </activity>
+
+        <service
+            android:name="service.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
+        <service
+            android:name="service.WorkService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
+        <activity
+            android:name="activitypack.JobSchedulerKeepAliveAct"
+            android:label="@string/title_activity_job_scheduler_keep_alive"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activitys.RetrofitActivity"
+            android:label="@string/title_activity_retrofit"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
