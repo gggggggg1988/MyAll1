@@ -9,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.myall.R;
+import com.example.administrator.myall.activitys.ChenJinshi;
 import com.example.administrator.myall.activitys.RetrofitActivity;
+import com.example.administrator.myall.activitys.RoundIconActivity;
+import com.example.administrator.myall.activitys.StickyPulldown;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.util.LogUtils;
 
@@ -196,13 +199,19 @@ private BitmapUtils m_bitmapUtils;
                             context.startActivity(in1);
                             break;
                         case 2:
-
+                            Intent in2 = new Intent(context, StickyPulldown.class);
+                            in2.putExtra("StickyPulldown", list.get(position));
+                            context.startActivity(in2);
                             break;
                         case 3:
-
+                            Intent in3 = new Intent(context, ChenJinshi.class);
+                            in3.putExtra("ChenJinshi", list.get(position));
+                            context.startActivity(in3);
                             break;
                         case 4:
-
+                            Intent in4 = new Intent(context, RoundIconActivity.class);
+                            in4.putExtra("xfermode圆形头像", list.get(position));
+                            context.startActivity(in4);
                             break;
                         case 5:
 

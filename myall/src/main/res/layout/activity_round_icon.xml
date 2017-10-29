@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.myall.activitys.RoundIconActivity">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                        <com.example.administrator.myall.view.CircleImageView
+                            android:layout_width="160dp"
+                            app:Radius="160dp"
+                            app:type="circle"
+                            android:id="@+id/round"
+                            android:src="@mipmap/girl"
+                            android:layout_height="240dp"/>
+
+                        <com.example.administrator.myall.view.CircleImageView
+                            android:layout_width="160dp"
+                            app:Radius="160dp"
+                            app:type="round"
+                            android:id="@+id/round_icon"
+                            android:layout_below="@id/round"
+                            android:src="@mipmap/girl"
+                            android:layout_height="240dp"/>
+
+
+                        <com.example.administrator.myall.view.StripMeiZi
+                            android:layout_below="@id/round_icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="600dp"/>
+                        <!--<android.support.v4.widget.CircleImageView-->
+                        <!--android:layout_width="200dp"-->
+                        <!--android:src="@mipmap/girl"-->
+                        <!--android:layout_height="200dp"/>-->
+                </RelativeLayout>
+        </ScrollView>
+</RelativeLayout>

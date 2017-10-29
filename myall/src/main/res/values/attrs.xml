@@ -4,4 +4,17 @@
         <attr name="photo" format="integer"/>
         <attr name="text" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="StickPullView">
+        <attr name="radius" format="dimension"></attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="Radius" format="dimension"/>
+        <attr name="type">
+            <enum name="circle" value="0"/>
+            <enum name="round" value="1"/>
+        </attr>
+    </declare-styleable>
 </resources>

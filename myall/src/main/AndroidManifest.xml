@@ -99,6 +99,12 @@
             android:label="@string/title_activity_retrofit"
             android:theme="@style/AppTheme">
         </activity>
+        <activity android:name=".activitys.StickyPulldown">
+        </activity>
+        <activity android:name=".activitys.ChenJinshi">
+        </activity>
+        <activity android:name=".activitys.RoundIconActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -73,6 +73,11 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
 
         temp.add(new Data("使用jobScheduler保活demo"));
         temp.add(new Data("retrofit使用demo"));
+        temp.add(new Data("粘性下拉控件"));
+        temp.add(new Data("沉浸式状态栏"));
+        temp.add(new Data("xfermode圆形头像"));
+
+
 
         result.addAll(temp);
     }
