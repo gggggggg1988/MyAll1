@@ -25,6 +25,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
 
     <application
         android:name="application.AllAplication"
@@ -69,6 +70,10 @@
         <activity android:name=".LoginActivity">
         </activity>
         <activity
+            android:name=".activitys.KeepLiveAct"
+            android:theme="@style/keep_live_style">
+        </activity>
+        <activity
             android:name=".ProxyActivity"
             android:launchMode="standard">
         </activity>
@@ -104,6 +109,30 @@
         <activity android:name=".activitys.ChenJinshi">
         </activity>
         <activity android:name=".activitys.RoundIconActivity">
+        </activity>
+
+        <service
+            android:name=".biz.OneDotKeepLiveService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".service.keepAliveService.RemoteService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+        <service
+            android:name=".service.keepAliveService.LocalService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".service.keepAliveService.JobHandleService"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
+
+        <activity android:name=".activitys.RandomRecommand">
         </activity>
     </application>
 

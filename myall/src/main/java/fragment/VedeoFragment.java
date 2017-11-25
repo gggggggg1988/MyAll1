@@ -39,15 +39,35 @@ private  XRecyclerView  m_xRecyclerView;
         m_xRecyclerView.setLayoutManager(lm);
         getData();
         m_xRecyclerView.setAdapter(new FunctionListAdapter(mActivity,R.layout.layout,data));
+        m_xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                m_xRecyclerView.refreshComplete();
+            }
 
+            @Override
+            public void onLoadMore() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                m_xRecyclerView.loadMoreComplete();
+            }
+        });
     }
 
     private void getData() {
         data.add("StartPlugin");
         data.add("AgentWebviewTest");
-        data.add("Function2");
-        data.add("Function3");
-        data.add("Function4");
+        data.add("一像素保活");
+        data.add("双进程守护");
+        data.add("RandomRecommand");
 
     }
 
