@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.myall.R;
+import com.example.administrator.myall.utils.ShakeListener;
 import com.example.administrator.myall.utils.UIUtils;
 import com.example.administrator.myall.widget.StellarMap;
 
@@ -20,6 +21,7 @@ public class RandomRecommand extends AppCompatActivity {
     private StellarMap rootView ;
     private List<String> mDatas = new ArrayList<>();
     private RecommendAdapter mAdatper;
+    private ShakeListener mShake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,25 @@ public class RandomRecommand extends AppCompatActivity {
         // 设置默认选中页
         rootView.setGroup(0, true);
 
+        mShake = new ShakeListener(UIUtils.getContext());
+        mShake.setOnShakeListener(new ShakeListener.OnShakeListener() {
 
+            @Override
+            public void onShake()
+            {
+                // 当摇一摇的时候的回调
+                int currentGroup = rootView.getCurrentGroup();
+                if (currentGroup == mAdatper.getGroupCount() - 1)
+                {
+                    currentGroup = 0;
+                }
+                else
+                {
+                    currentGroup++;
+                }
+                rootView.setGroup(currentGroup, true);
+            }
+        });
     }
 
     private void initDatas() {
