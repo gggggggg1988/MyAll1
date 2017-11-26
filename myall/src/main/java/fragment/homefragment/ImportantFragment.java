@@ -27,6 +27,7 @@ import entity.Data;
 import entity.News;
 import fragment.BaseFragment;
 import http.NewsProtocal;
+import io.supercharge.shimmerlayout.ShimmerLayout;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.Closeable;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.OnSwipeMenuItemClickListener;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenu;
@@ -127,7 +128,9 @@ private SwipeMenuRecyclerView m_recyclerView;
                 m_recyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
             m_recyclerView.setAdapter(adapter);
             refreshLayout.setRefreshing(false);
+//            layout.stopShimmerAnimation();
         }
+
             }
     };
 
@@ -162,6 +165,7 @@ private SwipeMenuRecyclerView m_recyclerView;
     };
     private int lastVisibleItem,currentPage;
     private NewsProtocal protocal= new NewsProtocal();
+    private ShimmerLayout layout;
 
 
     public ImportantFragment() {
@@ -170,6 +174,7 @@ private SwipeMenuRecyclerView m_recyclerView;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         m_recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.home_recycler_view);
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
@@ -213,6 +218,16 @@ private SwipeMenuRecyclerView m_recyclerView;
         divider.setColor(Color.GRAY);
         m_recyclerView.addItemDecoration(divider);
 //        getData(1);
+        // Required empty public constructor
+        layout = (ShimmerLayout) view.findViewById(R.id.shimmer_layout);
+        layout.startShimmerAnimation();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layout.stopShimmerAnimation();
+                layout.setVisibility(View.GONE);
+            }
+        }, 3000);
         getData(1,15);
         super.onViewCreated(view, savedInstanceState);
     }

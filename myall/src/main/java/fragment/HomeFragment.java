@@ -50,9 +50,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         homeViewPager.setAdapter(new SubFragmentAdapter(((FragmentActivity) mActivity).getSupportFragmentManager()));
         indicator.setViewPager(homeViewPager);
         indicator.setOnPageChangeListener(this);
+
     }
     public HomeFragment() {
-        // Required empty public constructor
 
     }
 

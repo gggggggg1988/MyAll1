@@ -32,8 +32,12 @@ android {
 
     }
 }
-
+repositories{
+flatDir {
+    dirs 'libs'
+}}
 dependencies {
+    compile(name:'shimmerlayout-release', ext:'aar')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':SlidingMenu_lib')
     compile files('libs/xUtils-2.6.14.jar')
