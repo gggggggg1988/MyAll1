@@ -32,12 +32,13 @@ android {
 
     }
 }
-repositories{
-flatDir {
-    dirs 'libs'
-}}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 dependencies {
-    compile(name:'shimmerlayout-release', ext:'aar')
+    compile(name: 'shimmerlayout-release', ext: 'aar')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':SlidingMenu_lib')
     compile files('libs/xUtils-2.6.14.jar')
@@ -64,6 +65,7 @@ dependencies {
     compile project(':xrecyclerview')
     compile files('libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
     // Retrofit库
+
     // Okhttp库
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -82,4 +84,5 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     testCompile 'junit:junit:4.12'
+    compile project(':mzbanner')
 }

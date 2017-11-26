@@ -68,6 +68,7 @@ private  XRecyclerView  m_xRecyclerView;
         data.add("一像素保活");
         data.add("双进程守护");
         data.add("RandomRecommand");
+        data.add("魅族banner");
 
     }
 

@@ -134,6 +134,8 @@
 
         <activity android:name=".activitys.RandomRecommand">
         </activity>
+        <activity android:name=".activitys.MzBanner">
+        </activity>
     </application>
 
 </manifest>
