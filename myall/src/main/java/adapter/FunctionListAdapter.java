@@ -11,6 +11,12 @@ import android.widget.Button;
 import com.example.administrator.myall.AgentWebviewTest;
 import com.example.administrator.myall.ProxyActivity;
 import com.example.administrator.myall.R;
+import com.example.administrator.myall.activitys.MzBanner;
+import com.example.administrator.myall.activitys.RandomRecommand;
+import com.example.administrator.myall.biz.OneDotKeepLiveService;
+import com.example.administrator.myall.service.keepAliveService.JobHandleService;
+import com.example.administrator.myall.service.keepAliveService.LocalService;
+import com.example.administrator.myall.service.keepAliveService.RemoteService;
 
 import java.io.File;
 import java.util.List;
@@ -58,7 +64,26 @@ public class FunctionListAdapter extends CommonAdapter<String> {
                         Intent intent = new Intent(m_context, AgentWebviewTest.class);
                         m_context.startActivity(intent);
                         break;
-
+                    case 3:
+                        Intent intent1 = new Intent(m_context, OneDotKeepLiveService.class);
+                        m_context.startService(intent1);
+                        break;
+                    case 4:
+                        Intent intent2 = new Intent(m_context, LocalService.class);
+                        m_context.startService(intent2);
+                        Intent inten3 = new Intent(m_context, RemoteService.class);
+                        m_context.startService(inten3);
+                        Intent inten4 = new Intent(m_context, JobHandleService.class);
+                        m_context.startService(inten4);
+                        break;
+                    case 5:
+                        Intent in5 = new Intent(m_context, RandomRecommand.class);
+                        m_context.startActivity(in5);
+                        break;
+                    case 6:
+                        Intent in6 = new Intent(m_context, MzBanner.class);
+                        m_context.startActivity(in6);
+                        break;
                     default:
                         break;
                 }

@@ -18,15 +18,22 @@ import android.widget.Toast;
 import com.example.administrator.myall.R;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
+import com.vise.log.ViseLog;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+import com.vise.xsnow.http.mode.CacheMode;
+import com.vise.xsnow.http.mode.CacheResult;
+import com.vise.xsnow.ui.status.StatusLayoutManager;
 
 import java.util.List;
 
 import MyInterface.RecyclerItemClickListener;
 import adapter.HomeRycleAdapter;
-import entity.Data;
+import entity.JuHeNewsBean;
 import entity.News;
 import fragment.BaseFragment;
 import http.NewsProtocal;
+import io.supercharge.shimmerlayout.ShimmerLayout;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.Closeable;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.OnSwipeMenuItemClickListener;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenu;
@@ -40,11 +47,12 @@ import widget.DividerLine;
  * A simple {@link Fragment} subclass.
  */
 public class ImportantFragment extends BaseFragment implements Consts, SwipeRefreshLayout.OnRefreshListener {
-private SwipeMenuRecyclerView m_recyclerView;
+    private SwipeMenuRecyclerView m_recyclerView;
     private BitmapUtils m_bitmapUtils;
     private SwipeRefreshLayout refreshLayout;
     private LinearLayoutManager m_layoutManager;
     private HomeRycleAdapter adapter;
+    private StatusLayoutManager mStatusLayoutManager;
     /**
      * 菜单创建器。在Item要创建菜单的时候调用。
      */
@@ -102,33 +110,35 @@ private SwipeMenuRecyclerView m_recyclerView;
             }
         }
     };
-    private List<Data> result;
-    private Handler handler = new Handler(){
+    private List<JuHeNewsBean.Data> result;
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what==0 ) {
+            if (msg.what == 0) {
 
-            String JSON = (String) msg.obj;
-            Gson gson = new Gson();
-            News news = gson.fromJson(JSON, News.class);
-            result = news.getData();
-            adapter = new HomeRycleAdapter(mActivity,result);
-
-            adapter.setOnItemListener(new RecyclerItemClickListener() {
-                        @Override
-                        public void onItemClickListener(View view, int position) {
-
-                            Toast.makeText(mActivity, "被点的是position" + position, Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-                m_recyclerView.setSwipeMenuCreator(swipeMenuCreator);
-                m_recyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
-            m_recyclerView.setAdapter(adapter);
-            refreshLayout.setRefreshing(false);
-        }
+                String JSON = (String) msg.obj;
+                Gson gson = new Gson();
+                News news = gson.fromJson(JSON, News.class);
+//                result = news.getData();
+//                adapter = new HomeRycleAdapter(mActivity, result);
+//
+//                adapter.setOnItemListener(new RecyclerItemClickListener() {
+//                    @Override
+//                    public void onItemClickListener(View view, int position) {
+//
+//                        Toast.makeText(mActivity, "被点的是position" + position, Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//                m_recyclerView.setSwipeMenuCreator(swipeMenuCreator);
+//                m_recyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
+//                m_recyclerView.setAdapter(adapter);
+//                refreshLayout.setRefreshing(false);
+//            layout.stopShimmerAnimation();
             }
+
+        }
     };
 
     /**
@@ -160,8 +170,9 @@ private SwipeMenuRecyclerView m_recyclerView;
             }
         }
     };
-    private int lastVisibleItem,currentPage;
-    private NewsProtocal protocal= new NewsProtocal();
+    private int lastVisibleItem, currentPage;
+    private NewsProtocal protocal = new NewsProtocal();
+    private ShimmerLayout layout;
 
 
     public ImportantFragment() {
@@ -170,6 +181,51 @@ private SwipeMenuRecyclerView m_recyclerView;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+//        mStatusLayoutManager = StatusLayoutManager.newBuilder(getActivity())
+//                .contentView(R.layout.fragment_important)
+//                .loadingView(R.layout.loading_layout)
+//                .emptyView(R.layout.empty_layout)
+//                .networkErrorView(R.layout.neterror_layout)
+//                .otherErrorView(R.layout.error_layout)
+//                .retryViewId(R.id.reload_view)
+//                .onStatusViewListener(new OnStatusViewListener() {
+//                    @Override
+//                    public void onShowView(View view, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onHideView(View view, int id) {
+//
+//                    }
+//                })
+//                .onRetryListener(new OnRetryListener() {
+//                    @Override
+//                    public void onRetry() {
+//                        mStatusLayoutManager.showLoadingView();
+//
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                try {
+//                                    Thread.sleep(3000);
+//                                } catch (InterruptedException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        mStatusLayoutManager.showContentView();
+//                                    }
+//                                });
+//                            }
+//                        }).start();
+//                    }
+//                }).build();
+//        mLayoutMain.addView(mStatusLayoutManager.getStatusLayout());
+        mStatusLayoutManager.showLoadingView();
         m_recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.home_recycler_view);
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
@@ -189,8 +245,8 @@ private SwipeMenuRecyclerView m_recyclerView;
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItem + 1 == adapter.getItemCount()) {
 //                    refreshLayout.setRefreshing(true);
-                    currentPage = (lastVisibleItem+1)/15;
-                    getData(1,15*(currentPage+1));
+                    currentPage = (lastVisibleItem + 1) / 15;
+                    getData(1, 15 * (currentPage + 1));
 
                     try {
                         Thread.sleep(2000);
@@ -213,15 +269,70 @@ private SwipeMenuRecyclerView m_recyclerView;
         divider.setColor(Color.GRAY);
         m_recyclerView.addItemDecoration(divider);
 //        getData(1);
-        getData(1,15);
+        // Required empty public constructor
+        layout = (ShimmerLayout) view.findViewById(R.id.shimmer_layout);
+        layout.startShimmerAnimation();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layout.stopShimmerAnimation();
+                layout.setVisibility(View.GONE);
+            }
+        }, 3000);
+        getData(1, 15);
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void getData(int table,int page) {
-        final String url = BASEURL+TABLE_NUM+table+PAGE+page;
-        protocal.loadData(url,handler);
+    private void getData(int table, int page) {
+//        final String url = BASEURL+TABLE_NUM+table+PAGE+page;
+//        protocal.loadData(url,handler);
+        ViseHttp.GET("toutiao/index?type=top&key=00f741733cfe831eefdeec40274a2484")
+                .setLocalCache(true)
+                .cacheMode(CacheMode.FIRST_CACHE)
+                .request(new ACallback<CacheResult<JuHeNewsBean>>() {
+                    @Override
+                    public void onSuccess(CacheResult<JuHeNewsBean> cacheResult) {
+                        ViseLog.i("request onSuccess!"+Thread.currentThread().getName());
+
+                        if (cacheResult == null || cacheResult.getCacheData() == null) {
+                            return;
+                        }
+                        if (cacheResult.isCache()) {
+                            ViseLog.i("From Cache:\n" + cacheResult.getCacheData().toString());
+                            fillData(cacheResult.getCacheData().getResult().getData());
+                        } else {
+                            ViseLog.i("From Remote:\n" + cacheResult.getCacheData().toString());
+                            fillData(cacheResult.getCacheData().getResult().getData());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
 
     }
+
+    private void fillData(List<JuHeNewsBean.Data> data) {
+        result = data;
+        adapter = new HomeRycleAdapter(mActivity, result);
+
+        adapter.setOnItemListener(new RecyclerItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+
+                Toast.makeText(mActivity, "被点的是position" + position, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        m_recyclerView.setSwipeMenuCreator(swipeMenuCreator);
+        m_recyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
+        m_recyclerView.setAdapter(adapter);
+
+    }
+
 
     //    private void getData(int page){
 ////        final String ul = BASEURL+KEY+PAGE+page+ROWS;
@@ -280,6 +391,23 @@ private SwipeMenuRecyclerView m_recyclerView;
 //                return null;
 //            }
 //        }.execute();
-        getData(1,15);
+//        getData(1, 15);
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                    refreshLayout.setRefreshing(false);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }

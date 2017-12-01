@@ -1,6 +1,7 @@
 package com.example.administrator.myall;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 
@@ -76,6 +78,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);//第一层加载的主视图，也是主容器
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
+//        Toast.makeText(this, "MyJobService", Toast.LENGTH_SHORT).show();
         setBehindContentView(R.layout.main_menu_layout);//第一层加载的主menu，也是menu容器
         SlidingMenu menu = getSlidingMenu();
         menu.setMode(SlidingMenu.LEFT);
@@ -118,6 +121,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         currentFrag = main;
         initViews();
     }
+
+
 
     private void initViews() {
         menu = View.inflate(this, R.layout.main_menu_layout, null);
@@ -334,6 +339,7 @@ private void setMenuContent() {
         super.onDestroy();
 
     }
+
 
 
 

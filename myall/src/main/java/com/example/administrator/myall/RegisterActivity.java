@@ -1,7 +1,7 @@
 package com.example.administrator.myall;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -9,14 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.activeandroid.query.Select;
+import com.example.administrator.myall.module.GreenDaoData;
+import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.User;
-
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends MvpBaseActivity<IRegisterView,RegisterPresenter> implements View.OnClickListener,MvpView {
 
     private LinearLayout llName;
     private TextView name;
@@ -38,6 +37,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.button3).setOnClickListener(this);
     }
 
+    @NonNull
+    @Override
+    public RegisterPresenter createPresenter() {
+        presenter = new RegisterPresenter(this);
+        presenter.testView();
+
+        return presenter;
+    }
+
     private EditText getEtName(){
         return (EditText) findViewById(R.id.et_name);
     }
@@ -49,20 +57,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button2:
-                User user = new User();
-                user.name = getEtName().getText().toString();
-                user.password = getEtPassword().getText().toString();
-                user.save();
+//                User user = new User();//activeAndroid
+//                user.name = getEtName().getText().toString();
+//                user.password = getEtPassword().getText().toString();
+//                user.save();
+
+                GreenDaoData user = new GreenDaoData(getEtName().getText().toString(),getEtPassword().getText().toString());//activeAndroid
+
+                getPresenter().saveData(user);
 
                 break;
             case R.id.button3:
-                List<User> users = new Select().from(User.class).execute();
+                List<GreenDaoData> users = getPresenter().getDataList();
                 List<String> usernames = new ArrayList<>();
-                for (User s:users
+                for (GreenDaoData s:users
                      ) {
-                    usernames.add(s.name);
+                    usernames.add(s.getName());
                 }
-                listView.setAdapter(new ArrayAdapter<String>(LoginActivity.this,android.R.layout.simple_list_item_1,usernames));
+                listView.setAdapter(new ArrayAdapter<String>(RegisterActivity.this,android.R.layout.simple_list_item_1,usernames));
                 break;
         }
     }

@@ -24,6 +24,8 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
 
     <application
         android:name="application.AllAplication"
@@ -65,7 +67,11 @@
         </activity>
         <activity android:name=".Multi2">
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".RegisterActivity">
+        </activity>
+        <activity
+            android:name=".activitys.KeepLiveAct"
+            android:theme="@style/keep_live_style">
         </activity>
         <activity
             android:name=".ProxyActivity"
@@ -76,6 +82,59 @@
         <activity android:name=".ContentActivity">
         </activity>
         <activity android:name=".AgentWebviewTest">
+        </activity>
+
+        <service
+            android:name="service.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
+        <service
+            android:name="service.WorkService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
+        <activity
+            android:name="activitypack.JobSchedulerKeepAliveAct"
+            android:label="@string/title_activity_job_scheduler_keep_alive"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activitys.RetrofitActivity"
+            android:label="@string/title_activity_retrofit"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".activitys.StickyPulldown">
+        </activity>
+        <activity android:name=".activitys.ChenJinshi">
+        </activity>
+        <activity android:name=".activitys.RoundIconActivity">
+        </activity>
+
+        <service
+            android:name=".biz.OneDotKeepLiveService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".service.keepAliveService.RemoteService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+        <service
+            android:name=".service.keepAliveService.LocalService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".service.keepAliveService.JobHandleService"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
+
+        <activity android:name=".activitys.RandomRecommand">
+        </activity>
+        <activity android:name=".activitys.MzBanner">
         </activity>
     </application>
 

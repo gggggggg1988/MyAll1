@@ -2,17 +2,19 @@ package com.example.administrator.myall;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.lidroid.xutils.util.LogUtils;
-
-import entity.Data;
+import com.vise.log.ViseLog;
 
 public class ContentActivity extends AppCompatActivity {
     private WebView m_webView;
@@ -22,15 +24,31 @@ public class ContentActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         setContentView(R.layout.activity_content);
         Intent intent = getIntent();
-        Parcelable parcelable = intent.getParcelableExtra("data");
-        Data data = (Data) parcelable;
+//        Parcelable parcelable = intent.getParcelableExtra("data");
+//        Data data = (Data) parcelable;
+        final String url = intent.getStringExtra("data");
+
         initViews();
         WebSettings settings = m_webView.getSettings();
         settings.setJavaScriptEnabled(true);
-//        m_webView.loadData(data.getContent(),"text/html", "utf-8");
+//        m_webView.loadData(url,"text/html", "utf-8");
+        m_webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+                return super.onConsoleMessage(consoleMessage);
+            }
+        });
+        m_webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                ViseLog.i("url------"+url);
+                view.loadUrl(url);
+                return true;
+            }
+        });
         // 设置WevView要显示的网页
-        m_webView.loadDataWithBaseURL(null, data.getContent(), "text/html", "utf-8",
-                null);
+//        m_webView.loadDataWithBaseURL(null, data.getContent(), "text/html", "utf-8",
+//                null);
         m_webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         m_webView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -66,7 +84,7 @@ public class ContentActivity extends AppCompatActivity {
             }
         });
         
-
+        m_webView.loadUrl(url);
 
     }
     /**

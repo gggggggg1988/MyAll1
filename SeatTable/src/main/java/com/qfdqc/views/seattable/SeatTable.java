@@ -672,7 +672,6 @@ public class SeatTable extends View {
             canvas.drawText(txt, startX, getBaseLine(txtPaint, top, top + center), txtPaint);
             canvas.drawText(txt1, startX, getBaseLine(txtPaint, top + center, top + center + seatHeight / 2), txtPaint);
         }
-
         if (DBG) {
             Log.d("drawTest:", "top:" + top);
         }

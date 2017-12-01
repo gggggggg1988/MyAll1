@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.administrator.myall.LoginActivity;
+import com.example.administrator.myall.RegisterActivity;
 import com.example.administrator.myall.R;
 
 import cn.sharesdk.framework.ShareSDK;
@@ -48,7 +48,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.register:
                 //TODO implement
-                mActivity.startActivity(new Intent(mActivity, LoginActivity.class));
+                mActivity.startActivity(new Intent(mActivity, RegisterActivity.class));
                 break;
             case R.id.share:
                 showShare();

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import MyInterface.RecyclerItemClickListener;
-import entity.Data;
+import entity.JuHeNewsBean;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuAdapter;
 
 /**
@@ -30,11 +30,11 @@ public class HomeRycleAdapter extends SwipeMenuAdapter {
         this.itemListener = itemListener;
     }
 
-    private List<Data> list;
+    private List<JuHeNewsBean.Data> list;
 private BitmapUtils m_bitmapUtils;
     private Context context;
-    public  HomeRycleAdapter(Context context,List<Data> list) {
-        this.list = list == null ? new ArrayList<Data>() : list;
+    public  HomeRycleAdapter(Context context,List<JuHeNewsBean.Data> list) {
+        this.list = list == null ? new ArrayList<JuHeNewsBean.Data>() : list;
         this.context = context;
     }
     class RecyclerHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
@@ -138,7 +138,7 @@ private BitmapUtils m_bitmapUtils;
     @Override
     public int getItemViewType(int position) {
         //Enum类提供了一个ordinal()方法，返回枚举类型的序数，这里ITEM_TYPE.ITEM1.ordinal()代表0， ITEM_TYPE.ITEM2.ordinal()代表1
-         return list.get(position).getTop_image().equals(null) ? ITEM_TYPE.ITEM1.ordinal() : ITEM_TYPE.ITEM2.ordinal();
+         return list.get(position).getThumbnail_pic_s().equals(null) ? ITEM_TYPE.ITEM1.ordinal() : ITEM_TYPE.ITEM2.ordinal();
     }
 
 //    @Override
@@ -175,16 +175,16 @@ private BitmapUtils m_bitmapUtils;
 
             RecyclerHolder hold = (RecyclerHolder)holder;
             ((RecyclerHolder)holder).getTitle().setText(list.get(position).getTitle());
-            hold.getFrom().setText(list.get(position).getSource());
+            hold.getFrom().setText(list.get(position).getAuthor_name());
             m_bitmapUtils = new BitmapUtils( context);
-            m_bitmapUtils.display(hold.getIcon(),list.get(position).getTop_image());
-            hold.getComment().setText(list.get(position).getReply_count()+"");
+            m_bitmapUtils.display(hold.getIcon(),list.get(position).getThumbnail_pic_s());
+            hold.getComment().setText(list.get(position).getAuthor_name()+"");
             hold.convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    LogUtils.i("第"+position+"项被点了");
                     Intent in = new Intent(context, ContentActivity.class);
-                    in.putExtra("data", list.get(position));
+                    in.putExtra("data", list.get(position).getUrl());
                     context.startActivity(in);
                 }
             });
@@ -201,8 +201,8 @@ private BitmapUtils m_bitmapUtils;
         }else if(holder instanceof RecyclerHolder1){
             RecyclerHolder1 hold = (RecyclerHolder1) holder;
             hold.getTitle().setText(list.get(position).getTitle());
-            hold.getFrom().setText(list.get(position).getSource());
-            hold.getComment().setText(list.get(position).getReply_count()+"");
+            hold.getFrom().setText(list.get(position).getAuthor_name());
+            hold.getComment().setText(list.get(position).getAuthor_name()+"");
 
             ((RecyclerHolder1) holder).convertView.setOnClickListener(new View.OnClickListener() {
                 @Override

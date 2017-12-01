@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.qfdqc.views.seattable.SeatTable;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
     public SeatTable seatTableView;
     @Override
@@ -14,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
+        keepAlive();
         seatTableView = (SeatTable) findViewById(R.id.seatView);
         seatTableView.setScreenName("8号厅荧幕");//设置屏幕名称
         seatTableView.setMaxSelected(3);//设置最多选中
@@ -54,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
         seatTableView.setData(10,15);
+
+    }
+
+    private void keepAlive() {
 
     }
 

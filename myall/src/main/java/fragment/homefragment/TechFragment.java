@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import MyInterface.RecyclerItemClickListener;
-import adapter.HomeRycleAdapter;
+import adapter.DemoRycleAdapter;
 import entity.Data;
 import entity.News;
 import fragment.BaseFragment;
@@ -30,10 +30,6 @@ import http.BaseProtocal;
 import http.NewsProtocal;
 import widget.BannerView;
 import widget.footer.LoadMoreFooterView;
-
-import static util.Consts.BASEURL;
-import static util.Consts.PAGE;
-import static util.Consts.TABLE_NUM;
 
 
 /**
@@ -47,7 +43,7 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
     private LoadMoreFooterView loadMoreFooterView;
     private List<Data> result= new ArrayList<>();
     private List<Data> temp= new ArrayList<>();
-    private HomeRycleAdapter adapter;
+    private DemoRycleAdapter adapter;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -69,13 +65,20 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
     public TechFragment() {
         // Required empty public constructor
     }
-    private void getData(int table,int page) {
-        final String url = BASEURL+TABLE_NUM+table+PAGE+page;
+    private void getData() {
+//        final String url = BASEURL+TABLE_NUM+table+PAGE+page;
 //        protocal.loadData(url,handler);
         temp.clear();
-        for (int i = 0; i < 10; i++) {
-            temp.add(new Data("table:"+table+"title:"+"liwei"+i+"page:"+page));
-        }
+
+
+        temp.add(new Data("使用jobScheduler保活demo"));
+        temp.add(new Data("retrofit使用demo"));
+        temp.add(new Data("粘性下拉控件"));
+        temp.add(new Data("沉浸式状态栏"));
+        temp.add(new Data("xfermode圆形头像"));
+
+
+
         result.addAll(temp);
     }
     @Override
@@ -88,7 +91,7 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
         iRecyclerView.addHeaderView(bannerView);
 
         loadMoreFooterView = (LoadMoreFooterView) iRecyclerView.getLoadMoreFooterView();
-        adapter = new HomeRycleAdapter(mActivity,result==null?new ArrayList<Data>():result);
+        adapter = new DemoRycleAdapter(mActivity,result==null?new ArrayList<Data>():result);
 
         adapter.setOnItemListener(new RecyclerItemClickListener() {
             @Override
@@ -97,7 +100,7 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
 
             }
         });
-        getData(2,1);
+        getData();
         iRecyclerView.setAdapter(adapter);
 
         iRecyclerView.setOnRefreshListener(this);
@@ -125,7 +128,7 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
 
     @Override
     public void onRefresh() {
-        getData(2,1);
+//        getData(2,1);
         adapter.notifyDataSetChanged();
         iRecyclerView.setRefreshing(false);
     }
@@ -133,7 +136,7 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
     @Override
     public void onLoadMore() {
         page++;
-        getData(2,page);
+//        getData(2,page);
         adapter.notifyDataSetChanged();
 
     }
