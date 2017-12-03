@@ -2,6 +2,7 @@ package fragment.homefragment;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.administrator.myall.R;
@@ -24,6 +26,7 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.vise.xsnow.http.mode.CacheMode;
 import com.vise.xsnow.http.mode.CacheResult;
 import com.vise.xsnow.ui.status.StatusLayoutManager;
+import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 import java.util.List;
 
@@ -53,6 +56,9 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
     private LinearLayoutManager m_layoutManager;
     private HomeRycleAdapter adapter;
     private StatusLayoutManager mStatusLayoutManager;
+    public static final int []RES = new int[]{R.mipmap.image5,R.mipmap.image2,R.mipmap.image3,R.mipmap.image4,R.mipmap.image6,R.mipmap.image7,R.mipmap.image8};
+    public static final int []BANNER = new int[]{R.mipmap.banner1,R.mipmap.banner2,R.mipmap.banner3,R.mipmap.banner4,R.mipmap.banner5};
+
     /**
      * 菜单创建器。在Item要创建菜单的时候调用。
      */
@@ -237,6 +243,9 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
                         .getDisplayMetrics()));
         m_layoutManager = new LinearLayoutManager(mActivity);
         m_recyclerView.setLayoutManager(m_layoutManager);
+
+
+//        m_recyclerView.addView(header,0);
         m_recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -272,13 +281,7 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
         // Required empty public constructor
         layout = (ShimmerLayout) view.findViewById(R.id.shimmer_layout);
         layout.startShimmerAnimation();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                layout.stopShimmerAnimation();
-                layout.setVisibility(View.GONE);
-            }
-        }, 3000);
+
         getData(1, 15);
         super.onViewCreated(view, savedInstanceState);
     }
@@ -293,10 +296,12 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
                     @Override
                     public void onSuccess(CacheResult<JuHeNewsBean> cacheResult) {
                         ViseLog.i("request onSuccess!"+Thread.currentThread().getName());
-
+                        layout.stopShimmerAnimation();
+                        layout.setVisibility(View.GONE);
                         if (cacheResult == null || cacheResult.getCacheData() == null) {
                             return;
                         }
+
                         if (cacheResult.isCache()) {
                             ViseLog.i("From Cache:\n" + cacheResult.getCacheData().toString());
                             fillData(cacheResult.getCacheData().getResult().getData());
@@ -410,4 +415,6 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
             }
         }.start();
     }
+
+
 }

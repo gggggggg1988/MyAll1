@@ -136,6 +136,10 @@
         </activity>
         <activity android:name=".activitys.MzBanner">
         </activity>
+        <activity android:name=".activitys.CoordinateLayoutDemo">
+        </activity>
+        <activity android:name=".activitys.CoordinateAndViewpager">
+        </activity>
     </application>
 
 </manifest>

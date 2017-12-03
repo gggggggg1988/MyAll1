@@ -16,6 +16,7 @@
 package ndkjnidemo.wobiancao.com.recyclerview_swipe;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -163,6 +164,26 @@ public class SwipeMenuRecyclerView extends RecyclerView {
         mDefaultItemTouchHelper.setItemViewSwipeEnabled(canSwipe);
     }
 
+    @Override
+    public void addOnItemTouchListener(OnItemTouchListener listener) {
+        super.addOnItemTouchListener(listener);
+    }
+
+    @Override
+    public void draw(Canvas c) {
+        super.draw(c);
+    }
+
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        super.onMeasure(widthSpec, heightSpec);
+    }
+
+    @Override
+    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
+        return super.checkLayoutParams(p);
+    }
+
     /**
      * Get can long press swipe.
      *
@@ -234,6 +255,11 @@ public class SwipeMenuRecyclerView extends RecyclerView {
             }
         }
     };
+
+    @Override
+    public boolean onFilterTouchEventForSecurity(MotionEvent event) {
+        return super.onFilterTouchEventForSecurity(event);
+    }
 
     @Override
     public void setAdapter(Adapter adapter) {

@@ -69,6 +69,8 @@ private  XRecyclerView  m_xRecyclerView;
         data.add("双进程守护");
         data.add("RandomRecommand");
         data.add("魅族banner");
+        data.add("CoordinateLayout布局");
+        data.add("CoordinateLayout布局1");
 
     }
 
