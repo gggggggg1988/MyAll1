@@ -225,7 +225,7 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
 //                    }
 //                }).build();
 //        mLayoutMain.addView(mStatusLayoutManager.getStatusLayout());
-        mStatusLayoutManager.showLoadingView();
+//        mStatusLayoutManager.showLoadingView();
         m_recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.home_recycler_view);
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
