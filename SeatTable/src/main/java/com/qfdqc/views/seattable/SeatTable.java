@@ -420,6 +420,7 @@ public class SeatTable extends View {
         }
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int y = (int) event.getY();
@@ -556,9 +557,9 @@ public class SeatTable extends View {
     Matrix tempMatrix = new Matrix();
 
     void drawSeat(Canvas canvas) {
-        zoom = getMatrixScaleX();
+        zoom = getMatrixScaleX();//中matrix里面取出scaleX值
         long startTime = System.currentTimeMillis();
-        float translateX = getTranslateX();
+        float translateX = getTranslateX();//中matrix里面取出getTranslateX值
         float translateY = getTranslateY();
         float scaleX = zoom;
         float scaleY = zoom;
