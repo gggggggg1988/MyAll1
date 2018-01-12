@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'realm-android'
-//apply plugin: 'com.ceabie.dexnkife'
+
+apply plugin: 'com.ceabie.dexnkife'
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
@@ -106,6 +107,7 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.0'
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
+
 }
 
 
