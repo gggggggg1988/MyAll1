@@ -9,4 +9,7 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="monogram_width">40dp</dimen>
+    
+    //bounceView 高度
+    <dimen name="arc_max_height">40dp</dimen>
 </resources>

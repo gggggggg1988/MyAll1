@@ -1,14 +1,17 @@
 package http.retrofit;
 
-import entity.Data;
-
 /**
  * Created by Administrator on 2018/1/7 0007.
  */
 
 public class TetrofitProxy {
     private static final TetrofitProxy ourInstance = new TetrofitProxy();
-    IRetrofitInterface<Data> http1;
+
+    public void setHttp1(IRetrofitInterface http1) {
+        this.http1 = http1;
+    }
+
+    private IRetrofitInterface http1;
 
     public static TetrofitProxy getInstance() {
         return ourInstance;
@@ -19,19 +22,9 @@ public class TetrofitProxy {
 
     }
 
-    public void get(){
-        http1 = new RtrofitHttpIml();
-        http1.get(new CallBack<Data>() {
-            @Override
-            public void onSuccess(Data data) {
+    public void get(CallBack callBack){
 
-            }
-
-            @Override
-            public void onFail(String e) {
-
-            }
-        });
+        http1.get(callBack);
     }
 
     public void post(){
