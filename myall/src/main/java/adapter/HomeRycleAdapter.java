@@ -158,7 +158,7 @@ private BitmapUtils m_bitmapUtils;
 
     @Override
     public RecyclerView.ViewHolder onCompatCreateViewHolder(View realContentView, int viewType) {
-        //根据取得的不同的view类型，返回不同的holder
+        //根据取得的不同的view类型，返回不同的holder  此处的realContentView 已经包裹了一层左边和右边的deleteView
         if (viewType == ITEM_TYPE.ITEM1.ordinal()) {
             return new RecyclerHolder1(realContentView);
 

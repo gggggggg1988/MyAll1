@@ -140,6 +140,8 @@
         </activity>
         <activity android:name=".activitys.CoordinateAndViewpager">
         </activity>
+        <activity android:name=".activitys.AlertBounceView">
+        </activity>
     </application>
 
 </manifest>

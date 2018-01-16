@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.example.administrator.myall.AgentWebviewTest;
 import com.example.administrator.myall.ProxyActivity;
 import com.example.administrator.myall.R;
+import com.example.administrator.myall.activitys.AlertBounceView;
 import com.example.administrator.myall.activitys.CoordinateAndViewpager;
 import com.example.administrator.myall.activitys.CoordinateLayoutDemo;
 import com.example.administrator.myall.activitys.MzBanner;
@@ -92,6 +93,10 @@ public class FunctionListAdapter extends CommonAdapter<String> {
                     case 8:
                         Intent in8 = new Intent(m_context, CoordinateAndViewpager.class);
                         m_context.startActivity(in8);
+                        break;
+                    case 9:
+                        Intent in9 = new Intent(m_context, AlertBounceView.class);
+                        m_context.startActivity(in9);
                         break;
                     default:
                         break;

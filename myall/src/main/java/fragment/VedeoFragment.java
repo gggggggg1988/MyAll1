@@ -71,6 +71,7 @@ private  XRecyclerView  m_xRecyclerView;
         data.add("魅族banner");
         data.add("CoordinateLayout布局");
         data.add("CoordinateLayout布局1");
+        data.add("AlertBounceView");
 
     }
 

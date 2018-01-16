@@ -17,6 +17,16 @@
 
 
         </ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuRecyclerView>
+
+
+        <!--<com.jcodecraeer.xrecyclerview.SwipeMenuRecyclerView-->
+            <!--android:id="@+id/home_recycler_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+
+        <!--</com.jcodecraeer.xrecyclerview.SwipeMenuRecyclerView>-->
+
     </android.support.v4.widget.SwipeRefreshLayout>
     <io.supercharge.shimmerlayout.ShimmerLayout
         android:id="@+id/shimmer_layout"
