@@ -3,7 +3,7 @@
 
 # 这条配置可以指定这个包下类在第二dex中.
 android.support.v?.**
-#com.fooww.soft.android.**
+com.example.administrator.myall.**
 
 # 使用.class后缀，代表单个类.
 #-keep android.support.v7.app.AppCompatDialogFragment.class
