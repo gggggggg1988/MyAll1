@@ -322,7 +322,9 @@ public class SystemUtils {
      * @param requestCode
      */
     public static void requestPermission(Activity activity, @NonNull String permission, int requestCode) {
-        ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        if (!checkSelfPermission(activity,permission) ) {
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        }
     }
 
     /**

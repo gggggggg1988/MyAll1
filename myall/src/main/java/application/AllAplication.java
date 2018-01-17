@@ -1,11 +1,10 @@
 package application;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -25,20 +24,15 @@ import com.vise.utils.assist.SSLUtil;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.interceptor.HttpLogInterceptor;
 
-import java.io.File;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
-import dalvik.system.DexClassLoader;
-import dalvik.system.PathClassLoader;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Administrator on 2016/5/19 0019.
  */
-public class AllAplication extends MultiDexApplication {
+public class AllAplication extends Application {
     private static Context s_context;
     private static Thread s_main_thread;
     private static int mMainThreadId;
@@ -133,12 +127,19 @@ public class AllAplication extends MultiDexApplication {
         ;
 
     }
+
+//    @Override
+//    protected void attachBaseContext(Context base) {
+//        super.attachBaseContext(base);
+//        MultiDex.install(this);
+//    }
     @Override
     public void onCreate() {
         super.onCreate();
         initLog();
         initNet();
-        setDexLoader();
+
+
         s_context = getApplicationContext();
         mMainThreadId = android.os.Process.myPid();
         s_main_thread = Thread.currentThread();
@@ -184,60 +185,5 @@ public class AllAplication extends MultiDexApplication {
         ImageLoader.getInstance().init(configuration);
     }
 
-    private void setDexLoader() {
-        String libPath= Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "classes2.dex";
-        if (libPath!=null) {
-            PathClassLoader pathClassLoader = (PathClassLoader)getClassLoader();
-            DexClassLoader dexClassLoader = new DexClassLoader(libPath, getDir("dex", 0).getAbsolutePath(), libPath, getClassLoader());
-            try{
-                Object dexElements = combineArray(getDexElements(getPathList(pathClassLoader)), getDexElements(getPathList(dexClassLoader)));
-                Object pathList = getPathList(pathClassLoader);
-                setField(pathList, pathList.getClass(), "dexElements", dexElements);
-    //            return "SUCCESS";
-            } catch (Throwable e) {
-                e.printStackTrace();
-    //            return android.util.Log.getStackTraceString(e);
-            }
-        }
-    }
 
-    public static Object combineArray(Object arrayLhs, Object arrayRhs) {
-        Class<?> localClass = arrayLhs.getClass().getComponentType();
-        int i = Array.getLength(arrayLhs);
-        int j = i + Array.getLength(arrayRhs);
-        Object result = Array.newInstance(localClass, j);
-        for (int k = 0; k < j; ++k) {
-            if (k < i) {
-                Array.set(result, k, Array.get(arrayLhs, k));
-            } else {
-                Array.set(result, k, Array.get(arrayRhs, k - i));
-            }
-        }
-        return result;
-    }
-
-    public Object getDexElements(Object paramObject)
-            throws IllegalArgumentException, NoSuchFieldException, IllegalAccessException {
-        return getField(paramObject, paramObject.getClass(), "dexElements");
-    }
-
-    public Object getField(Object obj, Class<?> cl, String field)
-            throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        Field localField = cl.getDeclaredField(field);
-        localField.setAccessible(true);
-        return localField.get(obj);
-    }
-
-    public Object getPathList(Object baseDexClassLoader)
-            throws IllegalArgumentException, NoSuchFieldException, IllegalAccessException, ClassNotFoundException {
-        return getField(baseDexClassLoader, Class.forName("dalvik.system.BaseDexClassLoader"), "pathList");
-    }
-
-    public static void setField(Object obj, Class<?> cl, String field, Object value)
-            throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-
-        Field localField = cl.getDeclaredField(field);
-        localField.setAccessible(true);
-        localField.set(obj, value);
-    }
 }

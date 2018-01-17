@@ -1,11 +1,20 @@
 package com.example.administrator.myall;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -15,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 
@@ -27,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import application.HotFixEngine;
 import butterknife.ButterKnife;
 import fragment.BaseFragment;
 import fragment.ContentFragment;
@@ -37,6 +46,7 @@ import fragment.VedeoFragment;
 import util.DimentionUtil;
 import util.LoginApi;
 import util.OnLoginListener;
+import util.SystemUtils;
 import util.UserInfo;
 import widget.CircleView;
 
@@ -70,6 +80,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private FrameLayout container;
     private Fragment main, vedio, pic, me;
     private View menu;
+    private AlertDialog dialog;
+    // 要申请的权限
+    private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,9 +133,93 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         currentFrag = main;
         initViews();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!SystemUtils.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                SystemUtils.requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, 321);
+            }else {
+                HotFixEngine.copyDexFileToAppAndFix(this, "classes2.dex", true);
+            }
+        } else {
+            HotFixEngine.copyDexFileToAppAndFix(this, "classes2.dex", true);
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 321) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    // 判断用户是否 点击了不再提醒。(检测该权限是否还可以申请)
+                    boolean b = shouldShowRequestPermissionRationale(permissions[0]);
+                    if (!b) {
+                        // 用户还是想用我的 APP 的
+                        // 提示用户去应用设置界面手动开启权限
+                        showDialogTipUserGoToAppSettting();
+                    } else
+                        finish();
+                } else {
+                    HotFixEngine.copyDexFileToAppAndFix(this, "classes2.dex", true);
+                }
+            }
+        }
+    }
+// 提示用户去应用设置界面手动开启权限
 
+    private void showDialogTipUserGoToAppSettting() {
+
+        dialog = new AlertDialog.Builder(this)
+                .setTitle("存储权限不可用")
+                .setMessage("请在-应用设置-权限-中，允许支付宝使用存储权限来保存用户数据")
+                .setPositiveButton("立即开启", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 跳转到应用设置界面
+                        goToAppSetting();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).setCancelable(false).show();
+    }
+
+    //
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 123) {
+
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // 检查该权限是否已经获取
+                int i = ContextCompat.checkSelfPermission(this, permissions[0]);
+                // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+                if (i != PackageManager.PERMISSION_GRANTED) {
+                    // 提示用户应该去应用设置界面手动开启权限
+                    showDialogTipUserGoToAppSettting();
+                } else {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    HotFixEngine.copyDexFileToAppAndFix(this,"classes2.dex",true);
+//                         Toast.makeText(this, "权限获取成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    // 跳转到当前应用的设置界面
+    private void goToAppSetting() {
+        Intent intent = new Intent();
+
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+
+        startActivityForResult(intent, 123);
+    }
 
     private void initViews() {
         menu = View.inflate(this, R.layout.main_menu_layout, null);
@@ -131,62 +228,61 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setMenuContent();
     }
 
-private void setMenuContent() {
+    private void setMenuContent() {
 
-    new Thread(){
-        @Override
-        public void run() {
-            super.run();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<String> items = new ArrayList<String>();
+                items.add("国内新闻");
+                items.add("科技新闻");
+                items.add("农业新闻");
+                items.add("军事新闻");
+                items.add("国际新闻");
+                EventBus.getDefault().post(items);
             }
-            ArrayList<String> items = new ArrayList<String>();
-            items.add("国内新闻");
-            items.add("科技新闻");
-            items.add("农业新闻");
-            items.add("军事新闻");
-            items.add("国际新闻");
-            EventBus.getDefault().post(items);
-        }
-    }.start();
+        }.start();
 
 
-
-}
+    }
 
     /**
      * // Called in the same thread (default)
-
-     @Subscribe(threadMode = ThreadMode.POSTING) // ThreadMode is optional here
-     public void onMessage(MessageEvent event) {
-     log(event.message);
-     }
-
-     // Called in Android UI's main thread
-     @Subscribe(threadMode = ThreadMode.MAIN)
-     public void onMessage(MessageEvent event) {
-     textField.setText(event.message);
-     }
-
-     // Called in the background thread
-     @Subscribe(threadMode = ThreadMode.BACKGROUND)
-     public void onMessage(MessageEvent event){
-     saveToDisk(event.message);
-     }
-
-     // Called in a separate thread
-     @Subscribe(threadMode = ThreadMode.ASYNC)
-     public void onMessage(MessageEvent event){
-     backend.send(event.message);
-     }
+     *
      * @param list
+     * @Subscribe(threadMode = ThreadMode.POSTING) // ThreadMode is optional here
+     * public void onMessage(MessageEvent event) {
+     * log(event.message);
+     * }
+     * <p>
+     * // Called in Android UI's main thread
+     * @Subscribe(threadMode = ThreadMode.MAIN)
+     * public void onMessage(MessageEvent event) {
+     * textField.setText(event.message);
+     * }
+     * <p>
+     * // Called in the background thread
+     * @Subscribe(threadMode = ThreadMode.BACKGROUND)
+     * public void onMessage(MessageEvent event){
+     * saveToDisk(event.message);
+     * }
+     * <p>
+     * // Called in a separate thread
+     * @Subscribe(threadMode = ThreadMode.ASYNC)
+     * public void onMessage(MessageEvent event){
+     * backend.send(event.message);
+     * }
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent (ArrayList<String> list) {
+    public void OnEvent(ArrayList<String> list) {
         ListView listView = (ListView) findViewById(R.id.listMenu);
-        listView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list));
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list));
     }
 
     public ContentFragment getContentFragment() {
@@ -214,19 +310,20 @@ private void setMenuContent() {
             return;
         }
     }
- /*   public void switchFrag(Fragment from,Fragment to){
-        if (from != to) {
-            getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out).hide(from).commit();
-            currentFrag = to;
-            if (to.isAdded()) {
-                getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out).show(to).commit();
-            }else {
-                getSupportFragmentManager().beginTransaction().add(R.id.content_container,to,"to").setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out).show(to).commit();
-            }
-        }else{
-            return;
-        }
-    }*/
+
+    /*   public void switchFrag(Fragment from,Fragment to){
+           if (from != to) {
+               getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out).hide(from).commit();
+               currentFrag = to;
+               if (to.isAdded()) {
+                   getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out).show(to).commit();
+               }else {
+                   getSupportFragmentManager().beginTransaction().add(R.id.content_container,to,"to").setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out).show(to).commit();
+               }
+           }else{
+               return;
+           }
+       }*/
     @Override
     public void onClick(View v) {
 
@@ -265,7 +362,7 @@ private void setMenuContent() {
                 setPressed(3);
                 break;
             case R.id.circleView:
-               login("QQ");
+                login("QQ");
                 break;
             case R.id.imageView2:
 
@@ -317,7 +414,6 @@ private void setMenuContent() {
     }
 
 
-
 //    @Override
 //    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //
@@ -339,8 +435,6 @@ private void setMenuContent() {
         super.onDestroy();
 
     }
-
-
 
 
     /*
