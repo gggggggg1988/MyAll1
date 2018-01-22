@@ -2,7 +2,6 @@ package fragment.homefragment;
 
 
 import android.app.Fragment;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +13,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.administrator.myall.R;
@@ -26,7 +24,6 @@ import com.vise.xsnow.http.callback.ACallback;
 import com.vise.xsnow.http.mode.CacheMode;
 import com.vise.xsnow.http.mode.CacheResult;
 import com.vise.xsnow.ui.status.StatusLayoutManager;
-import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 import java.util.List;
 
@@ -188,50 +185,6 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-//        mStatusLayoutManager = StatusLayoutManager.newBuilder(getActivity())
-//                .contentView(R.layout.fragment_important)
-//                .loadingView(R.layout.loading_layout)
-//                .emptyView(R.layout.empty_layout)
-//                .networkErrorView(R.layout.neterror_layout)
-//                .otherErrorView(R.layout.error_layout)
-//                .retryViewId(R.id.reload_view)
-//                .onStatusViewListener(new OnStatusViewListener() {
-//                    @Override
-//                    public void onShowView(View view, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onHideView(View view, int id) {
-//
-//                    }
-//                })
-//                .onRetryListener(new OnRetryListener() {
-//                    @Override
-//                    public void onRetry() {
-//                        mStatusLayoutManager.showLoadingView();
-//
-//                        new Thread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                try {
-//                                    Thread.sleep(3000);
-//                                } catch (InterruptedException e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        mStatusLayoutManager.showContentView();
-//                                    }
-//                                });
-//                            }
-//                        }).start();
-//                    }
-//                }).build();
-//        mLayoutMain.addView(mStatusLayoutManager.getStatusLayout());
-//        mStatusLayoutManager.showLoadingView();
         m_recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.home_recycler_view);
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);

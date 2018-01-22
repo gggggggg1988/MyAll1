@@ -474,6 +474,8 @@ public class SeatTable extends View {
         return true;
     }
 
+
+
     private Runnable hideOverviewRunnable = new Runnable() {
         @Override
         public void run() {

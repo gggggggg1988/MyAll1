@@ -1,4 +1,4 @@
-package ndkjnidemo.wobiancao.com.mylibrary.recyclerview.base;
+package com.jcodecraeer.xrecyclerview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

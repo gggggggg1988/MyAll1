@@ -19,12 +19,12 @@ public class HttpProxy implements IHttpInterface{
         this.httpImp = httpImp;
     }
     @Override
-    public void get(String url, Map<String, Object> param, CallBack callBack) {
+    public void get(String url, Map<String, String> param, CallBack callBack) {
         httpImp.get(url,param,callBack);
     }
 
     @Override
-    public void post(String url, Map<String, Object> param, CallBack callBack) {
+    public void post(String url, Map<String, String> param, CallBack callBack) {
         httpImp.post(url,param,callBack);
     }
 }

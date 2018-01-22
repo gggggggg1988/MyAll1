@@ -23,7 +23,7 @@ import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuAdapter;
 /**
  * Created by Administrator on 2016/5/16 0016.
  */
-public class HomeRycleAdapter extends SwipeMenuAdapter {
+public class HomeRycleAdapter extends SwipeMenuAdapter<RecyclerView.ViewHolder> {
     private RecyclerItemClickListener itemListener;
 
     public void setOnItemListener(RecyclerItemClickListener itemListener) {//因为adapter是管理item的，所以声明，和设置监听器都放在了adapter里面

@@ -60,7 +60,7 @@ public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> exten
         View contentView = onCreateContentView(parent, viewType);
         if (mSwipeMenuCreator != null) {
             SwipeMenuLayout swipeMenuLayout = (SwipeMenuLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout
-                    .yanzhenjie_item_default, parent, false);
+                    .yanzhenjie_item_default1, parent, false);
 
             SwipeMenu swipeLeftMenu = new SwipeMenu(swipeMenuLayout, viewType);
             SwipeMenu swipeRightMenu = new SwipeMenu(swipeMenuLayout, viewType);
@@ -141,4 +141,7 @@ public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> exten
     public void onCompatBindViewHolder(VH holder, int position, List<Object> payloads) {
         onBindViewHolder(holder, position);
     }
+
+
+
 }

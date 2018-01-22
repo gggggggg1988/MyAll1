@@ -133,8 +133,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         currentFrag = main;
         initViews();
+//        HotFix();//热修复
+
+//        new Test().test();
+    }
+
+    private void HotFix() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!SystemUtils.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (!SystemUtils.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 SystemUtils.requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, 321);
             }else {
                 HotFixEngine.copyDexFileToAppAndFix(this, "classes2.dex", true);

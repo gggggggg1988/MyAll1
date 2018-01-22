@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.myall.R;
-import com.example.administrator.myall.widget.GridSpacingItemDecoration;
+import com.example.administrator.myall.widget.DividerGridItemDecoration;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class CoordinateLayoutDemo extends AppCompatActivity {
 
         XRecyclerView recyclerView = (XRecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this,4));
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(4,5,true));
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         data = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             data.add("data liwei"+i);

@@ -7,6 +7,6 @@ import java.util.Map;
  */
 
 public interface IHttpInterface {
-    void get(String url, Map<String ,Object> param,CallBack callBack);
-    void post(String url, Map<String ,Object> param,CallBack callBack);
+    void get(String url, Map<String ,String> param,CallBack callBack);
+    void post(String url, Map<String ,String> param,CallBack callBack);
 }

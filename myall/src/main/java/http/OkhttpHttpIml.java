@@ -20,7 +20,7 @@ import okhttp3.Response;
 public class OkhttpHttpIml implements IHttpInterface {
     private OkHttpClient m_client=new OkHttpClient();
     @Override
-    public void get(String url, Map<String, Object> param, final CallBack callBack) {
+    public void get(String url, Map<String, String> param, final CallBack callBack) {
         Request request = new Request.Builder()
                 .get()
                 .url(url)
@@ -41,7 +41,7 @@ public class OkhttpHttpIml implements IHttpInterface {
     }
 
     @Override
-    public void post(String url, Map<String, Object> param, final CallBack callBack) {
+    public void post(String url, Map<String, String> param, final CallBack callBack) {
         RequestBody body = appendParam(param);
         Request request = new Request.Builder()
                 .post(body)
@@ -62,16 +62,16 @@ public class OkhttpHttpIml implements IHttpInterface {
         });
     }
 
-    private RequestBody appendParam(Map<String, Object> param) {
+    private RequestBody appendParam(Map<String, String> param) {
         FormBody.Builder builder = new FormBody.Builder();
         if (param == null&&param.size()==0) {
             return  builder.build();
         }
 
-            Set<Map.Entry<String, Object>> entries = param.entrySet();
-            Iterator<Map.Entry<String, Object>> iterator = entries.iterator();
+            Set<Map.Entry<String, String>> entries = param.entrySet();
+            Iterator<Map.Entry<String, String>> iterator = entries.iterator();
             while (iterator.hasNext()){
-                Map.Entry<String, Object> next = iterator.next();
+                Map.Entry<String, String> next = iterator.next();
                 builder.add(next.getKey(), next.getValue().toString());
             }
         return builder.build();
