@@ -383,10 +383,10 @@ public class XRecyclerView extends RecyclerView {
 
     private class WrapAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-        private RecyclerView.Adapter adapter;
+        private SwipeMenuAdapter adapter;
 
         public WrapAdapter(RecyclerView.Adapter adapter) {
-            this.adapter = adapter;
+            this.adapter = (SwipeMenuAdapter) adapter;
         }
 
         public RecyclerView.Adapter getOriginalAdapter(){
@@ -451,7 +451,7 @@ public class XRecyclerView extends RecyclerView {
                 adapterCount = adapter.getItemCount();
                 if (adjPosition < adapterCount) {
                     if(payloads.isEmpty()){
-                        adapter.onBindViewHolder(holder, adjPosition);
+                        adapter.onBindViewHolder(holder, adjPosition,null);
                     }
                     else{
                         adapter.onBindViewHolder(holder, adjPosition,payloads);

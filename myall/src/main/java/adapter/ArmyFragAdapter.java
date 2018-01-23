@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.myall.R;
+import com.jcodecraeer.xrecyclerview.ItemViewDelegateManager;
 import com.jcodecraeer.xrecyclerview.SwipeMenuAdapter;
 
 import java.util.ArrayList;
@@ -20,11 +21,13 @@ import entity.Data;
  */
 
 public class ArmyFragAdapter extends SwipeMenuAdapter<RecyclerView.ViewHolder> {
+    private final ItemViewDelegateManager mItemViewDelegateManager;
     private  Context m_context;
     private List<Data> datas = new ArrayList();
     public ArmyFragAdapter(Context context, List<Data> datas) {
         this.datas = datas;
         m_context = context;
+        mItemViewDelegateManager = new ItemViewDelegateManager();
     }
 
     @Override

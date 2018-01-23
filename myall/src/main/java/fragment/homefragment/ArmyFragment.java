@@ -34,9 +34,9 @@ import com.zhouwei.mzbanner.holder.MZViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.ArmyFragAdapter;
 import entity.Data;
 import fragment.BaseFragment;
+import fragment.homefragment.adapter.ArmyMultiAdapter;
 
 import static util.Consts.BASEURL;
 import static util.Consts.PAGE;
@@ -98,20 +98,20 @@ public class ArmyFragment extends BaseFragment {
 
             // 添加左侧的，如果不添加，则左侧不会出现菜单。
             {
-                SwipeMenuItem addItem = new SwipeMenuItem(mActivity)
-                        .setBackgroundDrawable(R.drawable.selector_green)// 点击的背景。
-                        .setImage(R.mipmap.ic_action_add) // 图标。
-                        .setWidth(width) // 宽度。
-                        .setHeight(height); // 高度。
-                swipeLeftMenu.addMenuItem(addItem); // 添加一个按钮到左侧菜单。
-
-                SwipeMenuItem closeItem = new SwipeMenuItem(mActivity)
-                        .setBackgroundDrawable(R.drawable.selector_red)
-                        .setImage(R.mipmap.ic_action_close)
-                        .setWidth(width)
-                        .setHeight(height);
-
-                swipeLeftMenu.addMenuItem(closeItem); // 添加一个按钮到左侧菜单。
+//                SwipeMenuItem addItem = new SwipeMenuItem(mActivity)
+//                        .setBackgroundDrawable(R.drawable.selector_green)// 点击的背景。
+//                        .setImage(R.mipmap.ic_action_add) // 图标。
+//                        .setWidth(width) // 宽度。
+//                        .setHeight(height); // 高度。
+//                swipeLeftMenu.addMenuItem(addItem); // 添加一个按钮到左侧菜单。
+//
+//                SwipeMenuItem closeItem = new SwipeMenuItem(mActivity)
+//                        .setBackgroundDrawable(R.drawable.selector_red)
+//                        .setImage(R.mipmap.ic_action_close)
+//                        .setWidth(width)
+//                        .setHeight(height);
+//
+//                swipeLeftMenu.addMenuItem(closeItem); // 添加一个按钮到左侧菜单。
             }
 
             // 添加右侧的，如果不添加，则右侧不会出现菜单。
@@ -125,16 +125,16 @@ public class ArmyFragment extends BaseFragment {
                         .setHeight(height);
                 swipeRightMenu.addMenuItem(deleteItem);// 添加一个按钮到右侧侧菜单。
 
-                SwipeMenuItem closeItem = new SwipeMenuItem(mActivity)
-                        .setBackgroundDrawable(R.drawable.selector_purple)
-                        .setImage(R.mipmap.ic_action_close)
-                        .setWidth(width)
-                        .setHeight(height);
-                swipeRightMenu.addMenuItem(closeItem); // 添加一个按钮到右侧菜单。
+//                SwipeMenuItem closeItem = new SwipeMenuItem(mActivity)
+//                        .setBackgroundDrawable(R.drawable.selector_purple)
+//                        .setImage(R.mipmap.ic_action_close)
+//                        .setWidth(width)
+//                        .setHeight(height);
+//                swipeRightMenu.addMenuItem(closeItem); // 添加一个按钮到右侧菜单。
 
                 SwipeMenuItem addItem = new SwipeMenuItem(mActivity)
                         .setBackgroundDrawable(R.drawable.selector_green)
-                        .setText("添加")
+                        .setText("取消")
                         .setTextColor(Color.WHITE)
                         .setWidth(width)
                         .setHeight(height);
@@ -151,7 +151,8 @@ public class ArmyFragment extends BaseFragment {
     protected void initData() {
         super.initData();
         getData(2, 1);
-        adapter = new ArmyFragAdapter(mActivity, result);
+//        adapter = new ArmyFragAdapter(mActivity, result);
+        adapter = new ArmyMultiAdapter(result);
         rv.setSwipeMenuCreator(swipeMenuCreator);
         rv.setSwipeMenuItemClickListener(menuItemClickListener);
         rv.setAdapter(adapter);

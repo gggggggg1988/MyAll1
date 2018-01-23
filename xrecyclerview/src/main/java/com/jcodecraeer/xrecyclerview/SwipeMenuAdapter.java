@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by Yan Zhenjie on 2016/7/27.
+ * Created by Liwei
  */
 public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
@@ -122,7 +122,7 @@ public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> exten
             for (int i = 0; i < childCount; i++) {
                 View childView = swipeMenuLayout.getChildAt(i);
                 if (childView instanceof SwipeMenuView) {
-                    ((SwipeMenuView) childView).bindAdapterViewHolder(holder);
+                    ((SwipeMenuView) childView).bindAdapterViewHolder(holder);//左边和右边的swipView单独处理
                 }
             }
         }
