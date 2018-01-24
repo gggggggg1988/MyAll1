@@ -16,7 +16,7 @@ public class AlertBounceView extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert_bounce_view);
-        m_textView.setText("haha");
+//        m_textView.setText("haha");
         m_textView = (TextView) findViewById(R.id.textView8);
 
         m_textView.setOnClickListener(this);
