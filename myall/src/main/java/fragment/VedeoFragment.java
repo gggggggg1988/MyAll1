@@ -38,7 +38,7 @@ private  XRecyclerView  m_xRecyclerView;
         RecyclerView.LayoutManager lm = new LinearLayoutManager(mActivity);
         m_xRecyclerView.setLayoutManager(lm);
         getData();
-        m_xRecyclerView.setAdapter(new FunctionListAdapter(mActivity,R.layout.layout,data));
+        m_xRecyclerView.setAdapter(new FunctionListAdapter(mActivity,data));
         m_xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
