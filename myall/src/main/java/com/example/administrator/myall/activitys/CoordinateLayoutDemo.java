@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.administrator.myall.R;
 import com.example.administrator.myall.widget.DividerGridItemDecoration;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ public class CoordinateLayoutDemo extends AppCompatActivity {
         bar.setTitle("Demo");
         setSupportActionBar(bar);
 
-        XRecyclerView recyclerView = (XRecyclerView) findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         recyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         data = new ArrayList<>();
