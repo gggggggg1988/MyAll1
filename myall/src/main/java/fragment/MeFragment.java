@@ -7,9 +7,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.example.administrator.myall.RegisterActivity;
 import com.example.administrator.myall.R;
+import com.example.administrator.myall.RegisterActivity;
+import com.example.administrator.myall.utils.LogUtils;
+import com.tencent.connect.UserInfo;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
+
+import org.json.JSONObject;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -19,6 +27,10 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class MeFragment extends BaseFragment implements View.OnClickListener {
 
+
+    private Tencent mTencent;
+    private UserInfo userInfo;
+    public static IUiListener userInfoListener;
 
     public MeFragment() {
         // Required empty public constructor
@@ -45,6 +57,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.login:
                 //TODO implement
+                login();
                 break;
             case R.id.register:
                 //TODO implement
@@ -55,6 +68,17 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
+
+    public void login()
+    {
+        userInfoListener = new TencentCallBack();
+        mTencent = Tencent.createInstance("1105433218", getActivity().getApplicationContext());
+        if (!mTencent.isSessionValid())
+        {
+            mTencent.login(this, "all",userInfoListener);
+        }
+    }
+
     private void showShare() {
         ShareSDK.initSDK(mActivity);
         OnekeyShare oks = new OnekeyShare();
@@ -81,4 +105,72 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 // 启动分享GUI
         oks.show(mActivity);
     }
+
+   public class TencentCallBack implements IUiListener{
+
+        @Override
+        public void onComplete(Object value) {
+            System.out.println("有数据返回..");
+            if (value == null) {
+                return;
+            }
+
+            try {
+                JSONObject jo = (JSONObject) value;
+
+                int ret = jo.getInt("ret");
+
+                System.out.println("json=" + String.valueOf(jo));
+
+                if (ret == 0) {
+                    Toast.makeText(getActivity(), "登录成功",
+                            Toast.LENGTH_LONG).show();
+
+                    String openID = jo.getString("openid");
+                    String accessToken = jo.getString("access_token");
+                    String expires = jo.getString("expires_in");
+                    mTencent.setOpenId(openID);
+                    mTencent.setAccessToken(accessToken, expires);
+                }
+
+                System.out.println("开始获取用户信息");
+                userInfo = new UserInfo(getActivity(), mTencent.getQQToken());
+                userInfo.getUserInfo(new IUiListener() {
+                    @Override
+                    public void onComplete(Object value) {
+                        LogUtils.i("user info ----"+value.toString());
+                        Toast.makeText(getActivity(), value.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(UiError uiError) {
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+
+
+        }
+
+        @Override
+        public void onError(UiError uiError) {
+
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+    }
+
+
+
 }
