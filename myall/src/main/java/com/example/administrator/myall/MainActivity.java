@@ -1,6 +1,5 @@
 package com.example.administrator.myall;
 
-import android.content.Intent;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +26,6 @@ import android.widget.PopupWindow;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
-import com.tencent.tauth.Tencent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -413,14 +411,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 76637) {
-            if (resultCode == -1) {
-                Tencent.onActivityResultData(requestCode, resultCode, data,MeFragment.userInfoListener);
-                Tencent.handleResultData(data, MeFragment.userInfoListener);
-            }
-        }
-    }
+
     private void setPressed(int currentIndex) {
         for (int i = 0; i < btns.length; i++) {
             btns[i].setSelected(false);
