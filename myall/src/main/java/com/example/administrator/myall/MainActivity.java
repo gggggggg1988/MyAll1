@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
@@ -89,6 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
         setContentView(R.layout.activity_main);//第一层加载的主视图，也是主容器
+        fitVirtualStatusBarHeight();
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
 //        Toast.makeText(this, "MyJobService", Toast.LENGTH_SHORT).show();
@@ -136,6 +138,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //        HotFix();//热修复
 
 //        new Test().test();
+    }
+
+    private void fitVirtualStatusBarHeight() {
+        if (SystemUtils.checkDeviceHasNavigationBar(this) ) {
+            int navigationBarHeight = SystemUtils.getBottomStatusHeight(this);
+            LinearLayout container = (LinearLayout) findViewById(R.id.main_container);
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) container.getLayoutParams();
+            layoutParams.setMargins(0,0,0,navigationBarHeight);
+        }
     }
 
     private void HotFix() {
