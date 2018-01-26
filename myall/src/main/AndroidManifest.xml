@@ -158,6 +158,8 @@
         </activity>
         <activity android:name=".activitys.AlertBounceView">
         </activity>
+        <activity android:name=".activitys.CanvasPaintUsingAct">
+        </activity>
     </application>
 
 </manifest>

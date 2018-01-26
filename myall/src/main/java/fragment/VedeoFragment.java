@@ -72,6 +72,7 @@ private  XRecyclerView  m_xRecyclerView;
         data.add("CoordinateLayout布局");
         data.add("CoordinateLayout布局1");
         data.add("AlertBounceView");
+        data.add("CancasPaintUsing");
 
     }
 
