@@ -16,7 +16,10 @@
     <com.example.administrator.myall.widget.Clock
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
-    <com.example.administrator.myall.widget.LoadingView
+    <com.example.administrator.myall.widget.LoadTextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+    <com.example.administrator.myall.widget.XfermodeView
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
 
