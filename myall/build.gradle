@@ -48,7 +48,7 @@ android {
         additionalParameters = [//dex参数详见 dx --help
                                 '--multi-dex',//多分包
                                 '--set-max-idx-number=60000',//每个包内方法数上限
-                                '--main-dex-list='+projectDir+'/maindexlist.txt',//打包进主classes.dex的文件列表
+                                '--main-dex-list=' + projectDir + '/maindexlist.txt',//打包进主classes.dex的文件列表
                                 '--minimal-main-dex'//使上一句生效
         ]
     }
@@ -90,6 +90,9 @@ dependencies {
 
     // Okhttp库
     compile project(':mzbanner')
+    //    compile 'com.android.support:multidex:1.0.1'
+
+
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:recyclerview-v7:25.0.1'

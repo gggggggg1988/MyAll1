@@ -26,5 +26,6 @@
         <color name="white">#FFFFFFFF</color>
         <color name="white_pressed">#FFCFCFCF</color>
     <color name="shimmer_background_color">#b1b1b1</color>
+    <color name="puple">#9F79EE </color>
 
 </resources>

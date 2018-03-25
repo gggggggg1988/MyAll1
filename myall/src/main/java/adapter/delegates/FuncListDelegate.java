@@ -12,6 +12,7 @@ import com.example.administrator.myall.AgentWebviewTest;
 import com.example.administrator.myall.ProxyActivity;
 import com.example.administrator.myall.R;
 import com.example.administrator.myall.activitys.AlertBounceView;
+import com.example.administrator.myall.activitys.CanvasPaintUsingAct;
 import com.example.administrator.myall.activitys.CoordinateLayoutDemo;
 import com.example.administrator.myall.activitys.MzBanner;
 import com.example.administrator.myall.activitys.RandomRecommand;
@@ -105,6 +106,10 @@ public class FuncListDelegate implements ItemViewDelegate<String> {
                     case 9:
                         Intent in9 = new Intent(m_context, AlertBounceView.class);
                         m_context.startActivity(in9);
+                        break;
+                    case 10:
+                        Intent in10 = new Intent(m_context, CanvasPaintUsingAct.class);
+                        m_context.startActivity(in10);
                         break;
                     default:
                         break;
