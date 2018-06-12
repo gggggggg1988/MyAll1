@@ -79,6 +79,7 @@
         </activity>
         <activity android:name=".LoadingMoreViewTest">
         </activity>
+        <activity android:name=".activitys.WeiboPracticeActivity"></activity>
         <activity android:name=".ContentActivity">
         </activity>
         <activity android:name=".AgentWebviewTest">

@@ -138,6 +138,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //        new Test().test();
     }
 
+    @Override
+    protected DIRECTION getCreateDrection() {
+        return null;
+    }
+
+    @Override
+    protected DIRECTION getDestroyDrection() {
+        return null;
+    }
+
     private void HotFix() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!SystemUtils.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {

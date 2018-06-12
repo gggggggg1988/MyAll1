@@ -11,7 +11,7 @@
     <color name="background">#d3e2ce</color>
     <!--背景颜色-->
     <color name="light_gray">#8c9ea5</color>
-
+    <color name="colorTextTitle">#333333</color>
 
 
 
@@ -26,5 +26,13 @@
         <color name="white">#FFFFFFFF</color>
         <color name="white_pressed">#FFCFCFCF</color>
     <color name="shimmer_background_color">#b1b1b1</color>
+
+
+    <color name="colorTextContent">#444444</color>
+    <color name="colorTextAssistant">#888888</color>
+
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorBackgroundDark">#f2f2f2</color>
+    <color name="colorDivision">#33aaaaaa</color>
 
 </resources>

@@ -428,7 +428,7 @@ public class SeatTable extends View {
         super.onTouchEvent(event);
 
         scaleGestureDetector.onTouchEvent(event);
-        gestureDetector.onTouchEvent(event);
+        gestureDetector.onTouchEvent(event);//注册点击事件 选择座位的时候的事件处理
         int pointerCount = event.getPointerCount();
         if (pointerCount > 1) {
             pointer = true;
@@ -436,6 +436,7 @@ public class SeatTable extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+//                Log.i("click test ---", "action down");
                 pointer = false;
                 downX = x;
                 downY = y;
@@ -456,6 +457,7 @@ public class SeatTable extends View {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+//                Log.i("click test ---", "action up");
                 handler.postDelayed(hideOverviewRunnable, 1500);
 
                 autoScale();
@@ -1047,14 +1049,15 @@ public class SeatTable extends View {
                 scaleFactor = 3 / getMatrixScaleY();
             }
             if (firstScale) {
-                scaleX = detector.getCurrentSpanX();
-                scaleY = detector.getCurrentSpanY();
+                scaleX = detector.getCurrentSpanX();//获取两个点的x轴间距
+                scaleY = detector.getCurrentSpanY();//获取两个点的y轴间距
                 firstScale = false;
             }
 
             if (getMatrixScaleY() * scaleFactor < 0.5) {
                 scaleFactor = 0.5f / getMatrixScaleY();
             }
+            Log.i("scale-----", "value---" + "scaleFactor--" + scaleFactor + "scaleX--" + scaleX + "scaleY--" + scaleY);
             matrix.postScale(scaleFactor, scaleFactor, scaleX, scaleY);
             invalidate();
             return true;
@@ -1074,7 +1077,15 @@ public class SeatTable extends View {
 
     GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
         @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            Log.i("click test ---", "double tap --------");
+            autoScroll();
+            return true;
+        }
+
+        @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
+            Log.i("click test ---", "single tap --------");
             isOnClick = true;
             int x = (int) e.getX();
             int y = (int) e.getY();
@@ -1094,14 +1105,14 @@ public class SeatTable extends View {
                             if (index >= 0) {
                                 remove(index);
                                 if (seatChecker != null) {
-                                    seatChecker.unCheck(i, j);
+                                    seatChecker.unCheck(i, j);//取消选择座位
                                 }
                             } else {
                                 if (selects.size() >= maxSelected) {
                                     Toast.makeText(getContext(), "最多只能选择" + maxSelected + "个", Toast.LENGTH_SHORT).show();
                                     return super.onSingleTapConfirmed(e);
                                 } else {
-                                    addChooseSeat(i, j);
+                                    addChooseSeat(i, j);//添加选择座位
                                     if (seatChecker != null) {
                                         seatChecker.checked(i, j);
                                     }

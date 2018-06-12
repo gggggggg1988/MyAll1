@@ -3,6 +3,8 @@ package com.example.administrator.myall;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +23,11 @@ public class ContentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        Transition explode = TransitionInflater.from(this).inflateTransition(R.transition.explode);
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
+        getWindow().setReenterTransition(explode);
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         setContentView(R.layout.activity_content);
         Intent intent = getIntent();

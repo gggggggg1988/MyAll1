@@ -12,9 +12,11 @@ import com.example.administrator.myall.AgentWebviewTest;
 import com.example.administrator.myall.ProxyActivity;
 import com.example.administrator.myall.R;
 import com.example.administrator.myall.activitys.AlertBounceView;
+import com.example.administrator.myall.activitys.CoordinateAndViewpager;
 import com.example.administrator.myall.activitys.CoordinateLayoutDemo;
 import com.example.administrator.myall.activitys.MzBanner;
 import com.example.administrator.myall.activitys.RandomRecommand;
+import com.example.administrator.myall.activitys.WeiboPracticeActivity;
 import com.example.administrator.myall.biz.OneDotKeepLiveService;
 import com.example.administrator.myall.service.keepAliveService.JobHandleService;
 import com.example.administrator.myall.service.keepAliveService.LocalService;
@@ -99,12 +101,16 @@ public class FuncListDelegate implements ItemViewDelegate<String> {
                         m_context.startActivity(in7);
                         break;
                     case 8:
-//                        Intent in8 = new Intent(m_context, CoordinateAndViewpager.class);
-//                        m_context.startActivity(in8);
+                        Intent in8 = new Intent(m_context, CoordinateAndViewpager.class);
+                        m_context.startActivity(in8);
                         break;
                     case 9:
                         Intent in9 = new Intent(m_context, AlertBounceView.class);
                         m_context.startActivity(in9);
+                        break;
+                    case 10:
+                        Intent in10 = new Intent(m_context, WeiboPracticeActivity.class);
+                        m_context.startActivity(in10);
                         break;
                     default:
                         break;

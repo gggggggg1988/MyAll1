@@ -1,2 +1,2 @@
-include ':myall', ':SlidingMenu_lib', ':Indicator_lib', ':biaobai', ':recyclerviewstudy', ':recyclerview-swipe', ':pluginstandard', ':mylibrary', ':xrecyclerview'
-include ':Demo', ':SeatTable', ':mzbanner'
+include ':myall', ':SlidingMenu_lib', ':Indicator_lib', ':biaobai',  ':recyclerview-swipe', ':pluginstandard', ':mylibrary', ':xrecyclerview'
+include ':Demo', ':SeatTable', ':mzbanner', ':refresh-footer', ':refresh-header', ':refresh-layout'
