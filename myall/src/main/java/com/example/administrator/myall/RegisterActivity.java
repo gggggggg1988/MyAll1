@@ -43,6 +43,8 @@ public class RegisterActivity extends MvpBaseActivity<IRegisterView,RegisterPres
         presenter = new RegisterPresenter(this);
         presenter.testView();
 
+
+
         return presenter;
     }
 
