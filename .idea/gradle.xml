@@ -19,7 +19,9 @@
             <option value="$PROJECT_DIR$/mzbanner" />
             <option value="$PROJECT_DIR$/pluginstandard" />
             <option value="$PROJECT_DIR$/recyclerview-swipe" />
-            <option value="$PROJECT_DIR$/recyclerviewstudy" />
+            <option value="$PROJECT_DIR$/refresh-footer" />
+            <option value="$PROJECT_DIR$/refresh-header" />
+            <option value="$PROJECT_DIR$/refresh-layout" />
             <option value="$PROJECT_DIR$/xrecyclerview" />
           </set>
         </option>
