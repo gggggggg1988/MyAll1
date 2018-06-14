@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.example.administrator.myall.R;
+import com.example.administrator.myall.dagger.component.NetComponent;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
@@ -28,6 +30,7 @@ import java.util.HashMap;
 
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by Administrator on 2016/5/19 0019.
@@ -38,6 +41,8 @@ public class AllAplication extends Application {
     private static int mMainThreadId;
     private static Looper mMainLooper;
     private static Handler mMainHandler;
+    private NetComponent netComponent;
+    public static AllAplication s_application;
 
     public static Handler getmMainHandler() {
         return mMainHandler;
@@ -65,7 +70,19 @@ public class AllAplication extends Application {
         ViseLog.plant(new LogcatTree());//添加打印日志信息到Logcat的树
     }
 
+
+
+
+    public NetComponent getNetComponent() {
+        return netComponent;
+    }
+
     private void initNet() {
+//        netComponent = DaggerNetComponent.builder()
+//                .netModule(new NetModule())
+//                .build();
+
+
         ViseHttp.init(this);
         ViseHttp.CONFIG()
                 //配置请求主机地址
@@ -138,8 +155,8 @@ public class AllAplication extends Application {
         super.onCreate();
         initLog();
         initNet();
-
-
+        initSettings();
+        s_application=this;
         s_context = getApplicationContext();
         mMainThreadId = android.os.Process.myPid();
         s_main_thread = Thread.currentThread();
@@ -183,6 +200,15 @@ public class AllAplication extends Application {
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(configuration);
+    }
+
+    private void initSettings() {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/PMingLiU.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+
     }
 
 

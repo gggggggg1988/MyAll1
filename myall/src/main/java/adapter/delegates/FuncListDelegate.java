@@ -112,6 +112,10 @@ public class FuncListDelegate implements ItemViewDelegate<String> {
                         Intent in10 = new Intent(m_context, WeiboPracticeActivity.class);
                         m_context.startActivity(in10);
                         break;
+                    case 11:
+                        Intent in11 = new Intent(m_context, WeiboPracticeActivity.class);
+                        m_context.startActivity(in11);
+                        break;
                     default:
                         break;
                 }

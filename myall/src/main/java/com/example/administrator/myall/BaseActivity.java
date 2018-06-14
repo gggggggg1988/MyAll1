@@ -1,10 +1,13 @@
 package com.example.administrator.myall;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by Administrator on 2016/5/22 0022.
@@ -14,6 +17,11 @@ public abstract class BaseActivity extends SlidingFragmentActivity {
     public enum DIRECTION {
 
         LEFT,RIGHT,TOP,BOTTOM,SCALE,FADE
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public void intent2Activity(Class<? extends  Activity> activity) {

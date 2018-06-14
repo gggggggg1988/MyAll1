@@ -16,18 +16,19 @@ import android.widget.Toast;
 import com.example.administrator.myall.R;
 import com.lidroid.xutils.util.LogUtils;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import service.MyJobService;
 
 public class JobSchedulerKeepAliveAct extends AppCompatActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.btn_keep_alive)
+    @BindView(R.id.btn_keep_alive)
     Button button4;
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     FloatingActionButton fab;
 
     @Override

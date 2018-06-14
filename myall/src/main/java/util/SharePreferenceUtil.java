@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-import com.minto.library.config.ConstantsServerName;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -236,7 +236,7 @@ import java.util.Set;
 	/**
 	 * 设置手机序列号
 	 * 
-	 * @param isFirst
+	 * @param
 	 */
 	public void setImei(String imei) {
 		editor.putString("imei", imei);
@@ -250,7 +250,7 @@ import java.util.Set;
 	/**
 	 * 设置手机序Imsi
 	 * 
-	 * @param isFirst
+	 * @param
 	 */
 	public void setImsi(String imsi) {
 		editor.putString("imsi", imsi);
@@ -370,7 +370,7 @@ import java.util.Set;
 		editor.commit();
 	}
 	public String getServerIp() {
-		return sp.getString("serverIp", ConstantsServerName.SERVERNAME);
+		return sp.getString("serverIp", "LiWei");
 	}
 	/**
 	 * 保存服务 port
@@ -380,7 +380,7 @@ import java.util.Set;
 		editor.commit();
 	}
 	public int getServerPort() {
-		return sp.getInt("serverPort",ConstantsServerName.IPPORT);
+		return sp.getInt("serverPort",0);
 	}
 	/**
 	 * 保存服务 ip port

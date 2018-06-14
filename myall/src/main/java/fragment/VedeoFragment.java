@@ -73,6 +73,7 @@ private  XRecyclerView  m_xRecyclerView;
         data.add("CoordinateLayout布局1");
         data.add("AlertBounceView");
         data.add("沉浸式联动布局微博");
+        data.add("Dagger2,retrofit,rxjava,mvp组合应用");
 
     }
 
