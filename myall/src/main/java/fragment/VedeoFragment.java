@@ -80,7 +80,7 @@ private  XRecyclerView  m_xRecyclerView;
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+//        ButterKnife.unbind(this);
     }
 
 

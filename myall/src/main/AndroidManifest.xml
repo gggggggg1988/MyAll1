@@ -162,6 +162,7 @@
         </activity>
         <activity android:name=".activitys.CanvasPaintUsingAct">
         </activity>
+        <activity android:name=".activitys.SplashActivity"></activity>
     </application>
 
 </manifest>

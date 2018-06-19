@@ -15,11 +15,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.administrator.myall.BaseActivity;
 import com.example.administrator.myall.MainActivity;
 import com.example.administrator.myall.R;
+import com.example.administrator.myall.dagger.component.DaggerSplashComponent;
+import com.example.administrator.myall.dagger.module.SplashModule;
 import com.example.administrator.myall.presenter.SplashContract;
 import com.example.administrator.myall.presenter.SplashPresenter;
 import com.example.administrator.myall.utils.AppUtil;
@@ -37,6 +39,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import application.AllAplication;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -48,7 +51,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * DATE 2016/7/22
  * owspace
  */
-public class SplashActivity extends BaseActivity implements SplashContract.View, EasyPermissions.PermissionCallbacks {
+public class SplashActivity extends AppCompatActivity implements SplashContract.View, EasyPermissions.PermissionCallbacks {
     @BindView(R.id.splash_img)
     FixedImageView splashImg;
     @Inject
@@ -67,22 +70,14 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        DaggerSplashComponent.builder()
-//                .netComponent(AllAplication.s_application.getNetComponent())
-//                .splashModule(new SplashModule(this))
-//                .build().inject(this);
+        DaggerSplashComponent.builder()
+                .netComponent(AllAplication.s_application.getNetComponent())
+                .splashModule(new SplashModule(this))
+                .build().inject(this);
         initStatus();
     }
 
-    @Override
-    protected DIRECTION getCreateDrection() {
-        return null;
-    }
 
-    @Override
-    protected DIRECTION getDestroyDrection() {
-        return null;
-    }
 
     private void initStatus() {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -203,7 +198,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
             ButterKnife.bind(SplashActivity.this);
             delaySplash();
             String deviceId = AppUtil.getDeviceId(this);
-            presenter.getSplash(deviceId);
+//            presenter.getSplash(deviceId);
         }
     }
 

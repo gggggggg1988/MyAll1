@@ -180,7 +180,7 @@ public class ArmyFragment extends BaseFragment {
         rv.addItemDecoration(new DividerItemDecoration(mActivity, LinearLayout.VERTICAL));
 
         View header_layout = LayoutInflater.from(getActivity()).inflate(R.layout.header_layout, null);
-         header = (MZBannerView) header_layout.findViewById(R.id.banner);
+        header = (MZBannerView) header_layout.findViewById(R.id.banner);
         header.setIndicatorVisible(true);
         List<Integer> list = new ArrayList<>();
         for(int i=0;i<RES.length;i++){
@@ -199,7 +199,7 @@ public class ArmyFragment extends BaseFragment {
 
 
         rv.setArrowImageView(R.drawable.iconfont_downgrey);
-        rv.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        rv.setRefreshProgressStyle(ProgressStyle.BallScale);
         rv.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
         rv.setLoadingListener(new XRecyclerView.LoadingListener() {
             public int count = 1;

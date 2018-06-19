@@ -7,15 +7,14 @@ import com.example.administrator.myall.utils.NetUtil;
 import com.example.administrator.myall.utils.OkHttpImageDownloader;
 import com.example.administrator.myall.utils.TimeUtil;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import application.AllAplication;
-import io.reactivex.schedulers.Schedulers;
+import rx.Subscriber;
+import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Mr.Yangxiufeng
@@ -43,19 +42,16 @@ public class SplashPresenter implements SplashContract.Presenter{
 
 
                     @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
                     public void onError(Throwable e) {
 //                        Logger.e(e,"load splash failed:");
                     }
 
-                    @Override
-                    public void onComplete() {
-//                        Logger.e("load splash onCompleted");
-                    }
 
-                    @Override
-                    public void onSubscribe(Subscription s) {
-
-                    }
 
                     @Override
                     public void onNext(SplashEntity splashEntity) {

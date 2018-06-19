@@ -204,19 +204,21 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItem + 1 == adapter.getItemCount()) {
-//                    refreshLayout.setRefreshing(true);
-                    currentPage = (lastVisibleItem + 1) / 15;
-                    getData(1, 15 * (currentPage + 1));
+                if (adapter!=null) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE
+                            && lastVisibleItem + 1 == adapter.getItemCount()) {
+    //                    refreshLayout.setRefreshing(true);
+                        currentPage = (lastVisibleItem + 1) / 15;
+                        getData(1, 15 * (currentPage + 1));
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+    //                    refreshLayout.setRefreshing(false);
+
                     }
-//                    refreshLayout.setRefreshing(false);
-
                 }
             }
 
@@ -228,8 +230,9 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
         });
         DividerLine divider = new DividerLine(LinearLayoutManager.VERTICAL);
         divider.setSize(2);
-        divider.setColor(Color.GRAY);
+        divider.setColor(Color.RED);
         m_recyclerView.addItemDecoration(divider);
+
 //        getData(1);
         // Required empty public constructor
         layout = (ShimmerLayout) view.findViewById(R.id.shimmer_layout);

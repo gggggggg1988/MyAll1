@@ -16,6 +16,7 @@ import com.example.administrator.myall.activitys.CoordinateAndViewpager;
 import com.example.administrator.myall.activitys.CoordinateLayoutDemo;
 import com.example.administrator.myall.activitys.MzBanner;
 import com.example.administrator.myall.activitys.RandomRecommand;
+import com.example.administrator.myall.activitys.SplashActivity;
 import com.example.administrator.myall.activitys.WeiboPracticeActivity;
 import com.example.administrator.myall.biz.OneDotKeepLiveService;
 import com.example.administrator.myall.service.keepAliveService.JobHandleService;
@@ -113,7 +114,7 @@ public class FuncListDelegate implements ItemViewDelegate<String> {
                         m_context.startActivity(in10);
                         break;
                     case 11:
-                        Intent in11 = new Intent(m_context, WeiboPracticeActivity.class);
+                        Intent in11 = new Intent(m_context, SplashActivity.class);
                         m_context.startActivity(in11);
                         break;
                     default:

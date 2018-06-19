@@ -7,10 +7,9 @@ import com.example.administrator.myall.module.entity.SplashEntity;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-
+import rx.Observable;
 
 
 /**

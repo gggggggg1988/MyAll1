@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.administrator.myall.R;
+import com.example.administrator.myall.dagger.component.DaggerNetComponent;
 import com.example.administrator.myall.dagger.component.NetComponent;
+import com.example.administrator.myall.dagger.module.NetModule;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
@@ -78,9 +80,9 @@ public class AllAplication extends Application {
     }
 
     private void initNet() {
-//        netComponent = DaggerNetComponent.builder()
-//                .netModule(new NetModule())
-//                .build();
+        netComponent = DaggerNetComponent.builder()
+                .netModule(new NetModule())
+                .build();
 
 
         ViseHttp.init(this);
