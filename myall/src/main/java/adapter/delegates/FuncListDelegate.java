@@ -14,6 +14,7 @@ import com.example.administrator.myall.R;
 import com.example.administrator.myall.activitys.AlertBounceView;
 import com.example.administrator.myall.activitys.CoordinateAndViewpager;
 import com.example.administrator.myall.activitys.CoordinateLayoutDemo;
+import com.example.administrator.myall.activitys.Main2Activity;
 import com.example.administrator.myall.activitys.MzBanner;
 import com.example.administrator.myall.activitys.RandomRecommand;
 import com.example.administrator.myall.activitys.SplashActivity;
@@ -116,6 +117,10 @@ public class FuncListDelegate implements ItemViewDelegate<String> {
                     case 11:
                         Intent in11 = new Intent(m_context, SplashActivity.class);
                         m_context.startActivity(in11);
+                        break;
+                    case 12:
+                        Intent in12 = new Intent(m_context, Main2Activity.class);
+                        m_context.startActivity(in12);
                         break;
                     default:
                         break;

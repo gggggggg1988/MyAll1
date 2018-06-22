@@ -2,10 +2,16 @@ package com.example.administrator.myall;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.webkit.ConsoleMessage;
@@ -18,8 +24,16 @@ import android.webkit.WebViewClient;
 import com.lidroid.xutils.util.LogUtils;
 import com.vise.log.ViseLog;
 
+import java.lang.reflect.Method;
+
+import util.StatusBarUtil;
+import widget.ScrollListenWebview;
+
 public class ContentActivity extends AppCompatActivity {
-    private WebView m_webView;
+    private ScrollListenWebview m_webView;
+    private Toolbar viewById;
+    private float mParallaxImageHeight=200f;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +125,64 @@ public class ContentActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(this).inflate(R.menu.actionbar_overflow_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * menu item 上面图标显示出来的关键方法
+     * @param featureId
+     * @param view
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onPreparePanel(int featureId, View view, Menu menu) {
+        if (menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try{
+                    Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e) {
+                    Log.e(getClass().getSimpleName(), "onMenuOpened...unable to set icons for overflow menu", e);
+                }
+            }
+        }
+
+        return super.onPreparePanel(featureId, view, menu);
+    }
+
     private void initViews() {
-        m_webView = (WebView) findViewById(R.id.web_content);
+        m_webView = (ScrollListenWebview) findViewById(R.id.web_content);
+        m_webView.setScrollListener(new ScrollListenWebview.ScrollListener() {
+            @Override
+            public void onScrollChange(int l, int t, int lo, int to) {
+                int baseColor = getResources().getColor(R.color.colorPrimary);
+                float alpha = Math.min(1, (float) t / mParallaxImageHeight);
+                viewById.setBackgroundColor(StatusBarUtil.mixtureColor(baseColor,alpha));
+            }
+        });
+        viewById = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(viewById);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        viewById.setTitle("Liwei Test");
+        //supportActionBar.setHomeAsUpIndicator();
+        supportActionBar.setTitle("");
+        viewById.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContentActivity.this.finish();
+            }
+        });
     }
 }

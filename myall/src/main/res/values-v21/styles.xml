@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="base_toolbar" parent="@style/toolbar">
+        <item name="android:elevation">6px</item>
+    </style>
+</resources>

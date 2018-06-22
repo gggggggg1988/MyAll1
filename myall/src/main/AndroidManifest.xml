@@ -35,22 +35,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name="com.tencent.tauth.AuthActivity"
-            android:noHistory="true"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:noHistory="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="1105433218" />
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="1105433218"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.tencent.connect.common.AssistActivity"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
         <meta-data
             android:name="AA_DB_NAME"
             android:value="Stu.db"/>
@@ -96,7 +98,7 @@
         </activity>
         <activity android:name=".LoadingMoreViewTest">
         </activity>
-        <activity android:name=".activitys.WeiboPracticeActivity"></activity>
+        <activity android:name=".activitys.WeiboPracticeActivity"/>
         <activity android:name=".ContentActivity">
         </activity>
         <activity android:name=".AgentWebviewTest">
@@ -162,7 +164,9 @@
         </activity>
         <activity android:name=".activitys.CanvasPaintUsingAct">
         </activity>
-        <activity android:name=".activitys.SplashActivity"></activity>
+        <activity android:name=".activitys.SplashActivity"/>
+        <activity android:name=".activitys.Main2Activity">
+        </activity>
     </application>
 
 </manifest>

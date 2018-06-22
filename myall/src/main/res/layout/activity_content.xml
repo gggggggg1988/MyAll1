@@ -6,11 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.administrator.myall.ContentActivity">
-    <WebView
+    <widget.ScrollListenWebview
         android:id="@+id/web_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </WebView>
+    </widget.ScrollListenWebview>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/base_toolbar"
+        app:theme="@style/toolbar_theme"
+        app:popupTheme="@style/popup_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>

@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -83,6 +84,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private AlertDialog dialog;
     // 要申请的权限
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         menu.setBehindWidth(DimentionUtil.dpi2Px(this, 250));
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
         menu.setBackgroundColor(getResources().getColor(R.color.colorMenu));
+//        toolbar = (Toolbar)findViewById(R.id.toolbar);
+
+
         m_btn_home = (Button) findViewById(R.id.rb1);
         m_btnVieo = (Button) findViewById(R.id.rb2);
         m_btnPic = (Button) findViewById(R.id.rb3);
@@ -394,13 +399,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     popWidth = popLayout.getMeasuredWidth();
 
 
-                    pop.showAsDropDown(rightIv, -popWidth, ivHight);
+                    pop.showAsDropDown(rightIv, -popWidth, 0);
                 } else {
                     if (pop.isShowing()) {
                         pop.dismiss();
                     } else {
 
-                        pop.showAsDropDown(rightIv, -popWidth, ivHight);
+                        pop.showAsDropDown(rightIv, -popWidth, 0);
                     }
                 }
 

@@ -276,6 +276,12 @@ public class StatusBarUtil {
         return (color & 0x00ffffff) | (((int) (a * alpha)) << 24);
     }
 
+    public static int getColorWithAlpha(float alpha, int baseColor) {
+        int a = Math.min(255, Math.max(0, (int)(alpha * 255.0F))) << 24;
+        int rgb = 16777215 & baseColor;//0x00ffffff==16777215
+        return a + rgb;
+    }
+
     /** 获取状态栏高度 */
     public static int getStatusBarHeight(Context context) {
         int result = 24;

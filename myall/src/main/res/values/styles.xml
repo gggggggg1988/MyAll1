@@ -10,8 +10,74 @@
         <item name="android:windowEnterAnimation">@transition/explode</item>
         <item name="android:windowReenterTransition">@transition/explode</item>
         <item name="android:windowAnimationStyle">@style/animfade</item>
+        <item name="android:homeAsUpIndicator">@drawable/home_asup_selector</item>
+        <item name="android:actionOverflowButtonStyle">@style/actionBarOverFlow</item>
+
+        <!-- 加入toolbar溢出【弹出】菜单的风格 -->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
     </style>
 
+
+    <style name="PopupMenuListView" parent="@android:style/Widget.Holo.ListView.DropDown">
+
+        <item name="android:divider">@color/colorAccent</item><!--menu列表项分割线的颜色-->
+        <item name="android:dividerHeight">2dp</item><!--menu列表项分割线的高度-->
+    </style>
+    <!--溢出[弹出]菜单样式 parent相当于继承【可以不要parent】-->
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+
+        <!--?????-->
+        <item name="android:dropDownListViewStyle">@style/PopupMenuListView</item>
+
+        <!-- 是否覆盖锚点，默认为true，即盖住Toolbar -->
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+        <!--<item name="android:paddingRight">5dp</item>-->
+        <item name="android:background">@color/white</item>
+        <!-- 弹出层背景颜色 -->
+        <item name="android:popupBackground">@color/colorAccent</item>
+        <!-- 弹出层垂直方向上的偏移，即在竖直方向上距离Toolbar的距离，值为负则会盖住Toolbar -->
+        <item name="android:dropDownVerticalOffset">5dp</item>
+        <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <!-- 设置弹出菜单文字颜色 -->
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+
+
+    <style name="base_toolbar" parent="toolbar"></style>
+    <!-- ToolBar样式.-->
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Light">
+    <!--修改toolbar的Title(大标题)颜色-->
+    <item name="android:textColorPrimary">@android:color/holo_red_dark</item>
+    <!--修改toolbar的subtitle(小标题)颜色-->
+    <item name="subtitleTextColor">@android:color/holo_red_dark</item>
+    <!--修改toolbar的图标颜色.-->
+    <item name="colorControlNormal">@android:color/holo_red_dark</item>
+    </style>
+        <!-- ToolBar菜单样式.-->
+    <style name="popup_theme" parent="@style/ThemeOverlay.AppCompat.Light">
+    <!--设置背景-->
+    <item name="android:background">@android:color/white</item>
+    <!--设置字体颜色-->
+    <item name="android:textColor">@android:color/holo_red_dark</item>
+    <!--设置不覆盖锚点-->
+    <item name="overlapAnchor">false</item>
+    </style>
+
+    <!--修改三个点的overflow 设置图标-->
+    <style name="actionBarOverFlow" parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:src">@mipmap/pressed_back</item>
+    </style>
     <style name="animfade" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>//打开的时候新页面进入动画
         <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>//打开时旧页面飞出的动画
