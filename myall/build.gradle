@@ -53,7 +53,7 @@ android {
         additionalParameters = [//dex参数详见 dx --help
                                 '--multi-dex',//多分包
                                 '--set-max-idx-number=60000',//每个包内方法数上限
-                                '--main-dex-list='+projectDir+'/maindexlist.txt',//打包进主classes.dex的文件列表
+                                '--main-dex-list=' + projectDir + '/maindexlist.txt',//打包进主classes.dex的文件列表
                                 '--minimal-main-dex'//使上一句生效
         ]
     }
@@ -145,5 +145,3 @@ dependencies {
     compile files('libs/logger-orhanobut-2.1.1.jar')
     compile files('libs/joda-time-2.9.3-no-tzdb.jar')
 }
-
-

@@ -18,6 +18,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -45,6 +46,7 @@ import fragment.MeFragment;
 import fragment.PicFragment;
 import fragment.VedeoFragment;
 import util.DimentionUtil;
+import util.LogUtil;
 import util.LoginApi;
 import util.OnLoginListener;
 import util.SystemUtils;
@@ -90,6 +92,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
+        //导航栏  底部  防止被虚拟按键遮住
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         setContentView(R.layout.activity_main);//第一层加载的主视图，也是主容器
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
@@ -304,6 +308,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void OnEvent(ArrayList<String> list) {
         ListView listView = (ListView) findViewById(R.id.listMenu);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list));
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onMessage(ArrayList<String> list){
+        LogUtil.i("list---"+list);
     }
 
     public ContentFragment getContentFragment() {
