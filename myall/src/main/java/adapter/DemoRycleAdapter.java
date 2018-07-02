@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.myall.R;
 import com.example.administrator.myall.activitys.ChenJinshi;
+import com.example.administrator.myall.activitys.MVPtest;
 import com.example.administrator.myall.activitys.RetrofitActivity;
 import com.example.administrator.myall.activitys.RoundIconActivity;
 import com.example.administrator.myall.activitys.StickyPulldown;
@@ -214,7 +215,8 @@ private BitmapUtils m_bitmapUtils;
                             context.startActivity(in4);
                             break;
                         case 5:
-
+                            Intent in5 = new Intent(context, MVPtest.class);
+                            context.startActivity(in5);
                             break;
 
                              default:

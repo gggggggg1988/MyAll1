@@ -3,6 +3,7 @@ package com.example.administrator.myall.activitys;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ private RecyclerView m_recyclerView ;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_mvptest);
+        setContentView(R.layout.activity_mvptest);
         m_recyclerView = (RecyclerView) findViewById(R.id.rv);
         presenter.fetch();
     }
@@ -54,7 +55,7 @@ private RecyclerView m_recyclerView ;
             public TextView view;
             public MvpViewholder(View itemView) {
                 super(itemView);
-//                view = (TextView) itemView.findViewById(R.id.mvp_text);
+                view = (TextView) itemView.findViewById(android.R.id.text1);
             }
 
 
@@ -67,8 +68,8 @@ private RecyclerView m_recyclerView ;
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mvp_item, parent,false);
-            return null;
+            View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent,false);
+            return new MvpViewholder(view);
         }
 
         @Override

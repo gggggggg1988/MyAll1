@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.aspsine.irecyclerview.IRecyclerView;
 import com.aspsine.irecyclerview.OnLoadMoreListener;
@@ -21,7 +20,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import MyInterface.RecyclerItemClickListener;
 import adapter.DemoRycleAdapter;
 import entity.Data;
 import entity.News;
@@ -76,6 +74,7 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
         temp.add(new Data("粘性下拉控件"));
         temp.add(new Data("沉浸式状态栏"));
         temp.add(new Data("xfermode圆形头像"));
+        temp.add(new Data("MVP Girl Test"));
 
 
 
@@ -93,13 +92,13 @@ public class TechFragment extends BaseFragment implements OnRefreshListener, OnL
         loadMoreFooterView = (LoadMoreFooterView) iRecyclerView.getLoadMoreFooterView();
         adapter = new DemoRycleAdapter(mActivity,result==null?new ArrayList<Data>():result);
 
-        adapter.setOnItemListener(new RecyclerItemClickListener() {
-            @Override
-            public void onItemClickListener(View view, int position) {
-                Toast.makeText(mActivity, "被点的是position" + position, Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//        adapter.setOnItemListener(new RecyclerItemClickListener() {
+//            @Override
+//            public void onItemClickListener(View view, int position) {
+//                Toast.makeText(mActivity, "被点的是position" + position, Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
         getData();
         iRecyclerView.setAdapter(adapter);
 
