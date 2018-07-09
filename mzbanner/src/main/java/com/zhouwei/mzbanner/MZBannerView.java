@@ -35,9 +35,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by zhouwei on 17/5/26.
- */
+
 
 public class MZBannerView<T> extends RelativeLayout {
     private static final String TAG = "MZBannerView";
