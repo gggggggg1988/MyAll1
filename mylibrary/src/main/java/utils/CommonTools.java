@@ -22,8 +22,6 @@ import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import application.AllAplication;
-
 /**
  * 
  * Filename: Description: 公用工具类 Company: 灿天
@@ -39,9 +37,9 @@ public class CommonTools {
 
 	private MediaPlayer mPlayer;
 	private SharePreferenceUtil spUtil;
-	public CommonTools() {
+	public CommonTools(Context context) {
 		mPlayer = new MediaPlayer();
-		spUtil=new SharePreferenceUtil(AllAplication.getContext(),"LiWei");
+		spUtil=new SharePreferenceUtil(context,"LiWei");
 	}
 
 	private int playState = 1;
