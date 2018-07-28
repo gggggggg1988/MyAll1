@@ -3,20 +3,34 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Demo/Demo.iml" filepath="$PROJECT_DIR$/Demo/Demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Demo/Demo.iml" filepath="$PROJECT_DIR$/Demo/Demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/Indicator_lib/Indicator_lib.iml" filepath="$PROJECT_DIR$/Indicator_lib/Indicator_lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MyAll.iml" filepath="$PROJECT_DIR$/MyAll.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Indicator_lib/Indicator_lib.iml" filepath="$PROJECT_DIR$/Indicator_lib/Indicator_lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MyAll1.iml" filepath="$PROJECT_DIR$/.idea/MyAll1.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyAll1.iml" filepath="$PROJECT_DIR$/MyAll1.iml" />
       <module fileurl="file://$PROJECT_DIR$/SeatTable/SeatTable.iml" filepath="$PROJECT_DIR$/SeatTable/SeatTable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SeatTable/SeatTable.iml" filepath="$PROJECT_DIR$/SeatTable/SeatTable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SlidingMenu_lib/SlidingMenu_lib.iml" filepath="$PROJECT_DIR$/SlidingMenu_lib/SlidingMenu_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/SlidingMenu_lib/SlidingMenu_lib.iml" filepath="$PROJECT_DIR$/SlidingMenu_lib/SlidingMenu_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/biaobai/biaobai.iml" filepath="$PROJECT_DIR$/biaobai/biaobai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biaobai/biaobai.iml" filepath="$PROJECT_DIR$/biaobai/biaobai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myall/myall.iml" filepath="$PROJECT_DIR$/myall/myall.iml" />
       <module fileurl="file://$PROJECT_DIR$/myall/myall.iml" filepath="$PROJECT_DIR$/myall/myall.iml" />
       <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mzbanner/mzbanner.iml" filepath="$PROJECT_DIR$/mzbanner/mzbanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/mzbanner/mzbanner.iml" filepath="$PROJECT_DIR$/mzbanner/mzbanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/pluginstandard/pluginstandard.iml" filepath="$PROJECT_DIR$/pluginstandard/pluginstandard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluginstandard/pluginstandard.iml" filepath="$PROJECT_DIR$/pluginstandard/pluginstandard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recyclerview-swipe/recyclerview-swipe.iml" filepath="$PROJECT_DIR$/recyclerview-swipe/recyclerview-swipe.iml" />
       <module fileurl="file://$PROJECT_DIR$/recyclerview-swipe/recyclerview-swipe.iml" filepath="$PROJECT_DIR$/recyclerview-swipe/recyclerview-swipe.iml" />
       <module fileurl="file://$PROJECT_DIR$/refresh-footer/refresh-footer.iml" filepath="$PROJECT_DIR$/refresh-footer/refresh-footer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/refresh-footer/refresh-footer.iml" filepath="$PROJECT_DIR$/refresh-footer/refresh-footer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/refresh-header/refresh-header.iml" filepath="$PROJECT_DIR$/refresh-header/refresh-header.iml" />
       <module fileurl="file://$PROJECT_DIR$/refresh-header/refresh-header.iml" filepath="$PROJECT_DIR$/refresh-header/refresh-header.iml" />
       <module fileurl="file://$PROJECT_DIR$/refresh-layout/refresh-layout.iml" filepath="$PROJECT_DIR$/refresh-layout/refresh-layout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/refresh-layout/refresh-layout.iml" filepath="$PROJECT_DIR$/refresh-layout/refresh-layout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" filepath="$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" filepath="$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" />
     </modules>
   </component>

@@ -64,6 +64,18 @@ public class SystemUtils {
     }
 
     /**
+     * 判断锁屏是否锁住了
+     *
+     * @since 1.0.0
+     */
+    public static boolean isLock(Context context) {
+
+        KeyguardManager km = (KeyguardManager) context
+                .getSystemService(Context.KEYGUARD_SERVICE);
+        return km.inKeyguardRestrictedInputMode();
+    }
+
+    /**
      * 判断当前设备类型是不是pad
      * @param context
      * @return
