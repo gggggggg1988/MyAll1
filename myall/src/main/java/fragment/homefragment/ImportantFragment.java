@@ -4,8 +4,6 @@ package fragment.homefragment;
 import android.app.Fragment;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.administrator.myall.MainActivity;
 import com.example.administrator.myall.R;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
@@ -292,10 +289,40 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
         String channelID = "1";
 
         String channelName = "channel_name";
-        Intent it = new Intent(getActivity(), MainActivity.class);
-        PendingIntent pit = PendingIntent.getActivity(mActivity, 0, it, 0);
-        NotificationUtils.getInstance(mActivity).sendNotification("通知","列表加载完成...",R.mipmap.batman,pit);
+//        Intent it = new Intent(getActivity(), MainActivity.class);
+//        PendingIntent pit = PendingIntent.getActivity(mActivity, 0, it, 0);
+//        NotificationUtils.getInstance(mActivity).sendNotification("通知","列表加载完成...",R.mipmap.batman,pit);
+        final NotificationUtils instance = NotificationUtils.getInstance(mActivity);
+        instance.createDownloadNotification();
+        new Thread(){
+            int i = 0;
+            @Override
+            public void run() {
+                super.run();
 
+                for(i=0;i<100;i++){
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                instance.setProgress(i);
+                            }
+                        });
+
+                        try {
+                                Thread.sleep(500);//演示休眠50毫秒
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                    }
+
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            instance.setProgress(i);
+                        }
+                    });
+            }
+        }.start();
 
 //        NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
 
