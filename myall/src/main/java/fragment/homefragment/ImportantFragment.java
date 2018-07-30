@@ -6,7 +6,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,9 +46,8 @@ import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuCreator;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuItem;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuRecyclerView;
 import util.Consts;
+import utils.NotificationUtils;
 import widget.DividerLine;
-
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -291,26 +289,34 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
     }
 
     private void alertTip() {
-        mNManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-        //定义一个PendingIntent点击Notification后启动一个Activity
+        String channelID = "1";
+
+        String channelName = "channel_name";
         Intent it = new Intent(getActivity(), MainActivity.class);
         PendingIntent pit = PendingIntent.getActivity(mActivity, 0, it, 0);
+        NotificationUtils.getInstance(mActivity).sendNotification("通知","列表加载完成...",R.mipmap.batman,pit);
 
-        //设置图片,通知标题,发送时间,提示方式等属性
-        Notification.Builder mBuilder = new Notification.Builder(mActivity);
-        mBuilder.setContentTitle("叶良辰")                        //标题
-                .setContentText("我有一百种方法让你呆不下去~")      //内容
-                .setSubText("——记住我叫叶良辰")                    //内容下面的一小段文字
-                .setTicker("收到叶良辰发送过来的信息~")             //收到信息后状态栏显示的文字信息
-                .setWhen(System.currentTimeMillis())           //设置通知时间
-                .setSmallIcon(R.mipmap.ic_launcher)            //设置小图标
-                .setLargeIcon(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.batman))                     //设置大图标
-                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
-//                .setSound(Uri.parse("android.resource://" + mActivity.getPackageName() + "/" + R.raw.biaobiao))  //设置自定义的提示音
-                .setAutoCancel(true)                           //设置点击后取消Notification
-                .setContentIntent(pit);                        //设置PendingIntent
-        notify1 = mBuilder.build();
-        mNManager.notify(NOTIFYID_1, notify1);
+
+//        NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+
+//        mNManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+//        //定义一个PendingIntent点击Notification后启动一个Activity
+//
+//        //设置图片,通知标题,发送时间,提示方式等属性
+//        Notification.Builder mBuilder = new Notification.Builder(mActivity);
+//        mBuilder.setContentTitle("叶良辰")                        //标题
+//                .setContentText("我有一百种方法让你呆不下去~")      //内容
+//                .setSubText("——记住我叫叶良辰")                    //内容下面的一小段文字
+//                .setTicker("收到叶良辰发送过来的信息~")             //收到信息后状态栏显示的文字信息
+//                .setWhen(System.currentTimeMillis())           //设置通知时间
+//                .setSmallIcon(R.mipmap.ic_launcher)            //设置小图标
+//                .setLargeIcon(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.batman))                     //设置大图标
+//                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
+////                .setSound(Uri.parse("android.resource://" + mActivity.getPackageName() + "/" + R.raw.biaobiao))  //设置自定义的提示音
+//                .setAutoCancel(true)                           //设置点击后取消Notification
+//                .setContentIntent(pit);                        //设置PendingIntent
+//        notify1 = mBuilder.build();
+//        mNManager.notify(NOTIFYID_1, notify1);
     }
 
     private void fillData(List<JuHeNewsBean.Data> data) {
