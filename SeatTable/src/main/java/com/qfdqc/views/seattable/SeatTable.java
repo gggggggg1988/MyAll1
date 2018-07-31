@@ -241,6 +241,7 @@ public class SeatTable extends View {
 
     private int downX, downY;
     private boolean pointer;
+    private boolean smallScaleBack=false;
 
     /**
      * 顶部高度,可选,已选,已售区域的高度
@@ -428,13 +429,14 @@ public class SeatTable extends View {
         int y = (int) event.getY();
         int x = (int) event.getX();
         super.onTouchEvent(event);
-
-        scaleGestureDetector.onTouchEvent(event);
-        gestureDetector.onTouchEvent(event);//注册点击事件 选择座位的时候的事件处理
         int pointerCount = event.getPointerCount();
         if (pointerCount > 1) {
+            Log.i(TAG, "onTouchEvent: pointer = true");
             pointer = true;
         }
+        scaleGestureDetector.onTouchEvent(event);
+        gestureDetector.onTouchEvent(event);//注册点击事件 选择座位的时候的事件处理
+
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -467,6 +469,9 @@ public class SeatTable extends View {
                 int downDX = Math.abs(x - downX);
                 int downDY = Math.abs(y - downY);
                 if ((downDX > 10 || downDY > 10) && !pointer) {
+                    autoScroll();
+                }
+                if (smallScaleBack) {
                     autoScroll();
                 }
 
@@ -1087,6 +1092,11 @@ public class SeatTable extends View {
             if (getMatrixScaleY() * scaleFactor < 0.5) {
                 scaleFactor = 0.5f / getMatrixScaleY();
             }
+            if (scaleFactor <1) {
+                smallScaleBack=true;
+            }else{
+                smallScaleBack=false;
+            }
             Log.i("scale-----", "value---" + "scaleFactor--" + scaleFactor + "scaleX--" + scaleX + "scaleY--" + scaleY);
             matrix.postScale(scaleFactor, scaleFactor, scaleX, scaleY);
             invalidate();
@@ -1102,6 +1112,7 @@ public class SeatTable extends View {
         public void onScaleEnd(ScaleGestureDetector detector) {
             isScaling = false;
             firstScale = true;
+
         }
     });
 
