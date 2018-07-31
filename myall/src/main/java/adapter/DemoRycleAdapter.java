@@ -13,6 +13,7 @@ import com.example.administrator.myall.activitys.ChenJinshi;
 import com.example.administrator.myall.activitys.RetrofitActivity;
 import com.example.administrator.myall.activitys.RoundIconActivity;
 import com.example.administrator.myall.activitys.StickyPulldown;
+import com.jcodecraeer.xrecyclerview.SwipeMenuMultiDelegateAdapter;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.util.LogUtils;
 
@@ -22,12 +23,11 @@ import java.util.List;
 import MyInterface.RecyclerItemClickListener;
 import activitypack.JobSchedulerKeepAliveAct;
 import entity.Data;
-import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuAdapter;
 
 /**
  * Created by Administrator on 2016/5/16 0016.
  */
-public class DemoRycleAdapter extends SwipeMenuAdapter {
+public class DemoRycleAdapter extends SwipeMenuMultiDelegateAdapter {
     private RecyclerItemClickListener itemListener;
 
     public void setOnItemListener(RecyclerItemClickListener itemListener) {//因为adapter是管理item的，所以声明，和设置监听器都放在了adapter里面
@@ -38,6 +38,7 @@ public class DemoRycleAdapter extends SwipeMenuAdapter {
 private BitmapUtils m_bitmapUtils;
     private Context context;
     public DemoRycleAdapter(Context context, List<Data> list) {
+        super(list);
         this.list = list == null ? new ArrayList<Data>() : list;
         this.context = context;
     }
