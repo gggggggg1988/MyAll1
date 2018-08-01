@@ -77,7 +77,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
 //    compile 'com.android.support.design:26.1.0'
-    compile 'com.android.support:design:26.+'
+    compile 'com.android.support:design:23.4.0'
     compile files('libs/universal-image-loader-1.9.0.jar')
     compile files('libs/commons-views-1.0.0.jar')
     compile files('libs/MobCommons-2016.0426.1819.jar')
@@ -101,7 +101,7 @@ dependencies {
     // Retrofit库
     // Okhttp库
     compile project(':mzbanner')
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
 
 
     compile 'com.jakewharton:butterknife:8.8.1'
@@ -149,4 +149,7 @@ dependencies {
     compile files('libs/calligraphy-2.2.0.jar')
     compile files('libs/logger-orhanobut-2.1.1.jar')
     compile files('libs/joda-time-2.9.3-no-tzdb.jar')
+
+    // badge
+    compile 'q.rorbin:badgeview:1.1.3'
 }

@@ -115,4 +115,6 @@
     <string name="music">音乐</string>
     <string name="backup">备份</string>
     <string name="friends">朋友</string>
+    <string name="favor">帮助</string>
+    <string name="visibility">视觉</string>
 </resources>
