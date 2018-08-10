@@ -117,4 +117,7 @@
     <string name="friends">朋友</string>
     <string name="favor">帮助</string>
     <string name="visibility">视觉</string>
+    <string name="search_label">搜索</string>
+    <string name="search_hint">搜索</string>
+    <string name="search_invoke">语音</string>
 </resources>

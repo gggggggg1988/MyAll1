@@ -76,6 +76,7 @@ private  XRecyclerView  m_xRecyclerView;
         data.add("Dagger2,retrofit,rxjava,mvp组合应用");
         data.add("toolBar用例");
         data.add("BottomNavigationViewEx");
+        data.add("popupwindow-alertdialog");
 
     }
 
