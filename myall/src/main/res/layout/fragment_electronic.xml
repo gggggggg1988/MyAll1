@@ -5,9 +5,11 @@
              tools:context="fragment.homefragment.ElectronicFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ndkjnidemo.wobiancao.com.mylibrary.recyclerview.moduleView.ModuleView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="adsl开发"/>
+        android:id="@+id/module_view"
+        android:layout_height="match_parent">
+
+    </ndkjnidemo.wobiancao.com.mylibrary.recyclerview.moduleView.ModuleView>
 
 </FrameLayout>

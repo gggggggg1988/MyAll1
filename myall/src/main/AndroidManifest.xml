@@ -191,6 +191,11 @@
         </activity>
         <activity android:name=".activitys.PopupwindowAlertdialog">
         </activity>
+        <activity
+            android:name="fragment.homefragment.activitys.CoordinateLayoutActivity"
+            android:label="@string/title_activity_coordinate_layout"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>
