@@ -3,11 +3,15 @@ package fragment.homefragment;
 
 import android.app.Fragment;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +49,8 @@ import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuRecyclerView;
 import util.Consts;
 import utils.NotificationUtils;
 import widget.DividerLine;
+
+import static android.app.Notification.VISIBILITY_SECRET;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -182,6 +188,7 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
     private NotificationManager mNManager;
     private Notification notify1;
     private int NOTIFYID_1=100;
+    private NotificationManager manager;
 
 
     public ImportantFragment() {
@@ -255,6 +262,7 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
                 .setLocalCache(true)
                 .cacheMode(CacheMode.FIRST_CACHE)
                 .request(new ACallback<CacheResult<JuHeNewsBean>>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onSuccess(CacheResult<JuHeNewsBean> cacheResult) {
                         ViseLog.i("request onSuccess!"+Thread.currentThread().getName());
@@ -272,7 +280,9 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
                             fillData(cacheResult.getCacheData().getResult().getData());
                         }
 
-                        alertTip();
+//                        alertTip();
+
+                        notice();
                     }
 
                     @Override
@@ -284,6 +294,89 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
 
 
     }
+
+    private NotificationManager getManager(){
+        if(manager == null){
+            manager = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        }
+        return manager;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void notice() {
+        final Notification.Builder builder = getNotificationBuilder();
+        builder.setDefaults(Notification.FLAG_ONLY_ALERT_ONCE);
+        getManager().notify(2,builder.build());
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i <100 ; i++) {
+                    try{
+                        Thread.sleep(1000);
+
+                        builder.setOnlyAlertOnce(true);
+                        builder.setDefaults(Notification.FLAG_ONLY_ALERT_ONCE);
+                        builder.setProgress(100,i,false);
+                        getManager().notify(2,builder.build());
+                    }catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }).start();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void updateChannel(int i) {
+        getManager().deleteNotificationChannel("channel_id"+i);
+        //id随便指定
+        i++;
+        NotificationChannel channel = new NotificationChannel("channel_id"+i,"channel_name"+i, NotificationManager.IMPORTANCE_LOW);
+        channel.canBypassDnd();//可否绕过，请勿打扰模式
+        channel.enableLights(true);//闪光
+        channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
+        channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
+        channel.canShowBadge();//桌面laucher消息角标
+        channel.enableVibration(false);//是否允许震动
+        channel.getAudioAttributes();//获取系统通知响铃声音配置
+        channel.getGroup();//获取通知渠道组
+        channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式
+        channel.setVibrationPattern(new long[]{0});//震动的模式，震3次，第一次100，第二次100，第三次200毫秒
+        channel.shouldShowLights();//是否会闪光
+        //通知管理者创建的渠道
+        getManager().createNotificationChannel(channel);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private Notification.Builder getNotificationBuilder(){
+        //大于8.0
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            //id随便指定
+            NotificationChannel channel = new NotificationChannel("channel_id","channel_name", NotificationManager.IMPORTANCE_LOW);
+            channel.canBypassDnd();//可否绕过，请勿打扰模式
+            channel.enableLights(true);//闪光
+            channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
+            channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
+            channel.canShowBadge();//桌面laucher消息角标
+            channel.enableVibration(true);//是否允许震动
+            channel.getAudioAttributes();//获取系统通知响铃声音配置
+            channel.getGroup();//获取通知渠道组
+            channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式
+            channel.setVibrationPattern(new long[]{100,100,200});//震动的模式，震3次，第一次100，第二次100，第三次200毫秒
+            channel.shouldShowLights();//是否会闪光
+            //通知管理者创建的渠道
+            getManager().createNotificationChannel(channel);
+
+        }
+        return new Notification.Builder(getActivity()).setAutoCancel(true).setChannelId("channel_id")
+                .setContentTitle("新消息来了")
+                .setContentText("新消息内容").setSmallIcon(R.mipmap.ic_launcher);
+    }
+
 
     private void alertTip() {
         String channelID = "1";
