@@ -29,6 +29,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by baoyunlong on 16/6/16.
  */
@@ -239,6 +241,7 @@ public class SeatTable extends View {
 
     private int downX, downY;
     private boolean pointer;
+    private boolean smallScaleBack=false;
 
     /**
      * 顶部高度,可选,已选,已售区域的高度
@@ -378,7 +381,7 @@ public class SeatTable extends View {
         }
 
 
-        matrix.postTranslate(numberWidth + spacing, headHeight + screenHeight + borderHeight + verSpacing);
+        matrix.postTranslate(numberWidth + spacing, headHeight + screenHeight + borderHeight + verSpacing);//初始化的时候，设置矩阵的平移参数
 
     }
 
@@ -426,13 +429,14 @@ public class SeatTable extends View {
         int y = (int) event.getY();
         int x = (int) event.getX();
         super.onTouchEvent(event);
-
-        scaleGestureDetector.onTouchEvent(event);
-        gestureDetector.onTouchEvent(event);//注册点击事件 选择座位的时候的事件处理
         int pointerCount = event.getPointerCount();
         if (pointerCount > 1) {
+            Log.i(TAG, "onTouchEvent: pointer = true");
             pointer = true;
         }
+        scaleGestureDetector.onTouchEvent(event);
+        gestureDetector.onTouchEvent(event);//注册点击事件 选择座位的时候的事件处理
+
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -451,6 +455,7 @@ public class SeatTable extends View {
                     if ((downDX > 10 || downDY > 10) && !pointer) {
                         int dx = x - lastX;
                         int dy = y - lastY;
+//                        Log.i("ACTION_MOVE ---", "dx--"+dx+"dy---"+dy);
                         matrix.postTranslate(dx, dy);
                         invalidate();
                     }
@@ -464,6 +469,9 @@ public class SeatTable extends View {
                 int downDX = Math.abs(x - downX);
                 int downDY = Math.abs(y - downY);
                 if ((downDX > 10 || downDY > 10) && !pointer) {
+                    autoScroll();
+                }
+                if (smallScaleBack) {
                     autoScroll();
                 }
 
@@ -560,11 +568,38 @@ public class SeatTable extends View {
 
     Matrix tempMatrix = new Matrix();
 
+    /**
+     * 上面的基本方法中，有关于变换的set方法都可以带来不同的效果，但是每个set都会把上个效果清除掉，例如依次调用了setSkew,setTranslate，那么最终只有setTranslate会起作用，那么如何才和将两种效果复合呢。Matrix给我们提供了很多方法。但是主要都是2类：
+
+     preXXXX:以pre开头，例如preTranslate
+     postXXXX:以post开头，例如postScale
+
+     他们分别代表了前乘，和后乘。看一段代码：
+
+     Matrix matrix = new Matrix();
+     matrix.setTranslate(100, 1000);
+     matrix.preScale(0.5f, 0.5f);
+     1
+     2
+     3
+     这里matrix前乘了一个scale矩阵，换算成数学式如下：
+
+     这里写图片描述
+
+     从上面可以看出，最终得出的matrix既包含了缩放信息也有平移信息。
+     后乘自然就是matrix在后面，而缩放矩阵在前面，由于矩阵前后乘并不等价，也就导致了他们的效果不同。我们来看看后乘的结果：
+
+     这里写图片描述
+
+     可以看到，结果跟上面不同，并且这也不是我们想要的结果，这里缩放没有更改，但是平移被减半了，换句话说，平移的距离也被缩放了。所以需要注意前后乘法的关系。
+     * @param canvas
+     */
     void drawSeat(Canvas canvas) {
         zoom = getMatrixScaleX();//中matrix里面取出scaleX值
         long startTime = System.currentTimeMillis();
         float translateX = getTranslateX();//中matrix里面取出getTranslateX值
         float translateY = getTranslateY();
+        Log.i(TAG, "drawSeat: translateX-"+translateX+"translateY--"+translateY);
         float scaleX = zoom;
         float scaleY = zoom;
 
@@ -585,7 +620,7 @@ public class SeatTable extends View {
                 }
 
                 int seatType = getSeatType(i, j);
-                tempMatrix.setTranslate(left, top);
+                tempMatrix.setTranslate(left, top);//临时的针对某个小bitmap的matrix信息
                 tempMatrix.postScale(xScale1, yScale1, left, top);
                 tempMatrix.postScale(scaleX, scaleY, left, top);
 
@@ -717,7 +752,7 @@ public class SeatTable extends View {
     }
 
     /**
-     * 绘制概览图
+     * 绘制概览图红色边框
      */
     void drawOverview(Canvas canvas) {
 
@@ -919,12 +954,12 @@ public class SeatTable extends View {
 
     private float getTranslateX() {
         matrix.getValues(m);
-        return m[2];
+        return m[Matrix.MTRANS_X];
     }
 
     private float getTranslateY() {
         matrix.getValues(m);
-        return m[5];
+        return m[Matrix.MTRANS_Y];
     }
 
     private float getMatrixScaleY() {
@@ -1057,6 +1092,11 @@ public class SeatTable extends View {
             if (getMatrixScaleY() * scaleFactor < 0.5) {
                 scaleFactor = 0.5f / getMatrixScaleY();
             }
+            if (scaleFactor <1) {
+                smallScaleBack=true;
+            }else{
+                smallScaleBack=false;
+            }
             Log.i("scale-----", "value---" + "scaleFactor--" + scaleFactor + "scaleX--" + scaleX + "scaleY--" + scaleY);
             matrix.postScale(scaleFactor, scaleFactor, scaleX, scaleY);
             invalidate();
@@ -1072,6 +1112,7 @@ public class SeatTable extends View {
         public void onScaleEnd(ScaleGestureDetector detector) {
             isScaling = false;
             firstScale = true;
+
         }
     });
 

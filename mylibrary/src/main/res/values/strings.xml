@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">My Library</string>
+    <string name="input_hint">input_hint</string>
+
+    <string name="input_prefill">input_hint1</string>
 </resources>

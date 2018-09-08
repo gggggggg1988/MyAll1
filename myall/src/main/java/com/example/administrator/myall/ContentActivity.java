@@ -10,7 +10,6 @@ import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -127,7 +126,7 @@ public class ContentActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        new MenuInflater(this).inflate(R.menu.actionbar_overflow_menu,menu);
+//        new MenuInflater(this).inflate(R.menu.actionbar_overflow_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 

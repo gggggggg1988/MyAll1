@@ -3,14 +3,15 @@ package fragment.homefragment;
 
 import android.app.Fragment;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.administrator.myall.MainActivity;
 import com.example.administrator.myall.R;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
@@ -47,9 +47,10 @@ import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuCreator;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuItem;
 import ndkjnidemo.wobiancao.com.recyclerview_swipe.SwipeMenuRecyclerView;
 import util.Consts;
+import utils.NotificationUtils;
 import widget.DividerLine;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
+import static android.app.Notification.VISIBILITY_SECRET;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -187,6 +188,7 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
     private NotificationManager mNManager;
     private Notification notify1;
     private int NOTIFYID_1=100;
+    private NotificationManager manager;
 
 
     public ImportantFragment() {
@@ -260,6 +262,7 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
                 .setLocalCache(true)
                 .cacheMode(CacheMode.FIRST_CACHE)
                 .request(new ACallback<CacheResult<JuHeNewsBean>>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onSuccess(CacheResult<JuHeNewsBean> cacheResult) {
                         ViseLog.i("request onSuccess!"+Thread.currentThread().getName());
@@ -277,7 +280,9 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
                             fillData(cacheResult.getCacheData().getResult().getData());
                         }
 
-                        alertTip();
+//                        alertTip();
+
+                        notice();
                     }
 
                     @Override
@@ -290,27 +295,148 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
 
     }
 
-    private void alertTip() {
-        mNManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-        //定义一个PendingIntent点击Notification后启动一个Activity
-        Intent it = new Intent(getActivity(), MainActivity.class);
-        PendingIntent pit = PendingIntent.getActivity(mActivity, 0, it, 0);
+    private NotificationManager getManager(){
+        if(manager == null){
+            manager = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        }
+        return manager;
+    }
 
-        //设置图片,通知标题,发送时间,提示方式等属性
-        Notification.Builder mBuilder = new Notification.Builder(mActivity);
-        mBuilder.setContentTitle("叶良辰")                        //标题
-                .setContentText("我有一百种方法让你呆不下去~")      //内容
-                .setSubText("——记住我叫叶良辰")                    //内容下面的一小段文字
-                .setTicker("收到叶良辰发送过来的信息~")             //收到信息后状态栏显示的文字信息
-                .setWhen(System.currentTimeMillis())           //设置通知时间
-                .setSmallIcon(R.mipmap.ic_launcher)            //设置小图标
-                .setLargeIcon(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.batman))                     //设置大图标
-                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
-//                .setSound(Uri.parse("android.resource://" + mActivity.getPackageName() + "/" + R.raw.biaobiao))  //设置自定义的提示音
-                .setAutoCancel(true)                           //设置点击后取消Notification
-                .setContentIntent(pit);                        //设置PendingIntent
-        notify1 = mBuilder.build();
-        mNManager.notify(NOTIFYID_1, notify1);
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void notice() {
+        final Notification.Builder builder = getNotificationBuilder();
+        builder.setDefaults(Notification.FLAG_ONLY_ALERT_ONCE);
+        getManager().notify(2,builder.build());
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i <100 ; i++) {
+                    try{
+                        Thread.sleep(1000);
+
+                        builder.setOnlyAlertOnce(true);
+                        builder.setDefaults(Notification.FLAG_ONLY_ALERT_ONCE);
+                        builder.setProgress(100,i,false);
+                        getManager().notify(2,builder.build());
+                    }catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }).start();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void updateChannel(int i) {
+        getManager().deleteNotificationChannel("channel_id"+i);
+        //id随便指定
+        i++;
+        NotificationChannel channel = new NotificationChannel("channel_id"+i,"channel_name"+i, NotificationManager.IMPORTANCE_LOW);
+        channel.canBypassDnd();//可否绕过，请勿打扰模式
+        channel.enableLights(true);//闪光
+        channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
+        channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
+        channel.canShowBadge();//桌面laucher消息角标
+        channel.enableVibration(false);//是否允许震动
+        channel.getAudioAttributes();//获取系统通知响铃声音配置
+        channel.getGroup();//获取通知渠道组
+        channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式
+        channel.setVibrationPattern(new long[]{0});//震动的模式，震3次，第一次100，第二次100，第三次200毫秒
+        channel.shouldShowLights();//是否会闪光
+        //通知管理者创建的渠道
+        getManager().createNotificationChannel(channel);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private Notification.Builder getNotificationBuilder(){
+        //大于8.0
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            //id随便指定
+            NotificationChannel channel = new NotificationChannel("channel_id","channel_name", NotificationManager.IMPORTANCE_LOW);
+            channel.canBypassDnd();//可否绕过，请勿打扰模式
+            channel.enableLights(true);//闪光
+            channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
+            channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
+            channel.canShowBadge();//桌面laucher消息角标
+            channel.enableVibration(true);//是否允许震动
+            channel.getAudioAttributes();//获取系统通知响铃声音配置
+            channel.getGroup();//获取通知渠道组
+            channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式
+            channel.setVibrationPattern(new long[]{100,100,200});//震动的模式，震3次，第一次100，第二次100，第三次200毫秒
+            channel.shouldShowLights();//是否会闪光
+            //通知管理者创建的渠道
+            getManager().createNotificationChannel(channel);
+
+        }
+        return new Notification.Builder(getActivity()).setAutoCancel(true).setChannelId("channel_id")
+                .setContentTitle("新消息来了")
+                .setContentText("新消息内容").setSmallIcon(R.mipmap.ic_launcher);
+    }
+
+
+    private void alertTip() {
+        String channelID = "1";
+
+        String channelName = "channel_name";
+//        Intent it = new Intent(getActivity(), MainActivity.class);
+//        PendingIntent pit = PendingIntent.getActivity(mActivity, 0, it, 0);
+//        NotificationUtils.getInstance(mActivity).sendNotification("通知","列表加载完成...",R.mipmap.batman,pit);
+        final NotificationUtils instance = NotificationUtils.getInstance(mActivity);
+        instance.createDownloadNotification();
+        new Thread(){
+            int i = 0;
+            @Override
+            public void run() {
+                super.run();
+
+                for(i=0;i<100;i++){
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                instance.setProgress(i);
+                            }
+                        });
+
+                        try {
+                                Thread.sleep(500);//演示休眠50毫秒
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                    }
+
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            instance.setProgress(i);
+                        }
+                    });
+            }
+        }.start();
+
+//        NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+
+//        mNManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+//        //定义一个PendingIntent点击Notification后启动一个Activity
+//
+//        //设置图片,通知标题,发送时间,提示方式等属性
+//        Notification.Builder mBuilder = new Notification.Builder(mActivity);
+//        mBuilder.setContentTitle("叶良辰")                        //标题
+//                .setContentText("我有一百种方法让你呆不下去~")      //内容
+//                .setSubText("——记住我叫叶良辰")                    //内容下面的一小段文字
+//                .setTicker("收到叶良辰发送过来的信息~")             //收到信息后状态栏显示的文字信息
+//                .setWhen(System.currentTimeMillis())           //设置通知时间
+//                .setSmallIcon(R.mipmap.ic_launcher)            //设置小图标
+//                .setLargeIcon(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.batman))                     //设置大图标
+//                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
+////                .setSound(Uri.parse("android.resource://" + mActivity.getPackageName() + "/" + R.raw.biaobiao))  //设置自定义的提示音
+//                .setAutoCancel(true)                           //设置点击后取消Notification
+//                .setContentIntent(pit);                        //设置PendingIntent
+//        notify1 = mBuilder.build();
+//        mNManager.notify(NOTIFYID_1, notify1);
     }
 
     private void fillData(List<JuHeNewsBean.Data> data) {

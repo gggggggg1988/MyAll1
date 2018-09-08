@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitys.PopupwindowAlertdialog">
+
+    <Button
+        android:id="@+id/popwindow_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="394dp"
+        android:layout_marginEnd="193dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="77dp"
+        android:text="Popwindow_left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/popwindow_from_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="163dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginStart="231dp"
+        android:layout_marginTop="308dp"
+        android:text="Popwindow_from_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="185dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="69dp"
+        android:text="alert_dialog"
+        app:layout_constraintBottom_toTopOf="@+id/popwindow_from_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popwindow_left"/>
+
+    <Button
+        android:id="@+id/eval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="236dp"
+        android:layout_marginEnd="258dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="17dp"
+        android:text="evaluation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alert"/>
+</android.support.constraint.ConstraintLayout>

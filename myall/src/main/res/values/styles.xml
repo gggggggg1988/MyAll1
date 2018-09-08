@@ -53,33 +53,34 @@
     </style>
 
 
-
     <style name="base_toolbar" parent="toolbar"></style>
     <!-- ToolBar样式.-->
     <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Light">
-    <!--修改toolbar的Title(大标题)颜色-->
-    <item name="android:textColorPrimary">@android:color/holo_red_dark</item>
-    <!--修改toolbar的subtitle(小标题)颜色-->
-    <item name="subtitleTextColor">@android:color/holo_red_dark</item>
-    <!--修改toolbar的图标颜色.-->
-    <item name="colorControlNormal">@android:color/holo_red_dark</item>
+        <!--修改toolbar的Title(大标题)颜色-->
+        <item name="android:textColorPrimary">@android:color/holo_red_dark</item>
+        <!--修改toolbar的subtitle(小标题)颜色-->
+        <item name="subtitleTextColor">@android:color/holo_red_dark</item>
+        <!--修改toolbar的图标颜色.-->
+        <item name="colorControlNormal">@android:color/holo_red_dark</item>
     </style>
-        <!-- ToolBar菜单样式.-->
+    <!-- ToolBar菜单样式.-->
     <style name="popup_theme" parent="@style/ThemeOverlay.AppCompat.Light">
-    <!--设置背景-->
-    <item name="android:background">@android:color/white</item>
-    <!--设置字体颜色-->
-    <item name="android:textColor">@android:color/holo_red_dark</item>
-    <!--设置不覆盖锚点-->
-    <item name="overlapAnchor">false</item>
+        <!--设置背景-->
+        <item name="android:background">@android:color/white</item>
+        <!--设置字体颜色-->
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <!--设置不覆盖锚点-->
+        <item name="overlapAnchor">false</item>
     </style>
 
     <!--修改三个点的overflow 设置图标-->
     <style name="actionBarOverFlow" parent="@android:style/Widget.ActionButton.Overflow">
         <item name="android:src">@mipmap/pressed_back</item>
     </style>
+
     <style name="animfade" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>//打开的时候新页面进入动画
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
+        //打开的时候新页面进入动画
         <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>//打开时旧页面飞出的动画
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_from_left</item>//关闭时旧页面进入动画
         <item name="android:activityCloseExitAnimation">@anim/slide_out_to_right</item>//关闭时新页面飞出动画
@@ -101,7 +102,7 @@
     </style>
 
     <!--一像素保活activity的样式-->
-    <style name="keep_live_style" >
+    <style name="keep_live_style">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -128,6 +129,7 @@
         <item name="android:paddingRight">@dimen/padding_common_d</item>
         <item name="android:drawablePadding">@dimen/padding_common</item>
     </style>
+
     <style name="AppTheme.Toolbar" parent="Widget.AppCompat.ActionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
@@ -199,6 +201,7 @@
         <item name="android:paddingLeft">@dimen/padding_common_h</item>
         <item name="android:paddingRight">@dimen/padding_common_h</item>
     </style>
+
     <style name="AppTheme.Label.Discription">
         <item name="android:gravity">top</item>
         <item name="android:lineSpacingExtra">5dp</item>
