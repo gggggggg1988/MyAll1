@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.administrator.myall"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 26
         multiDexEnabled true//启用
         versionCode 1
@@ -20,6 +20,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    configurations {
+        all*.exclude  module: 'PhotoView'  //去除重复依赖库
     }
 
     dataBinding {
@@ -147,7 +151,7 @@ dependencies {
     compile 'org.glassfish:javax.annotation:10.0-b28'
     compile files('libs/easypermissions.jar')
     compile files('libs/calligraphy-2.2.0.jar')
-    compile files('libs/logger-orhanobut-2.1.1.jar')
+   // compile files('libs/logger-orhanobut-2.1.1.jar')
     compile files('libs/joda-time-2.9.3-no-tzdb.jar')
 
     // badge

@@ -40,7 +40,7 @@ public class ElectronicFragment extends BaseFragment {
         m_moduleView.isShowTitle(false);
         list = new ArrayList<>();
         list.add(new ModuleViewBean(null, "CoordinateLayout Behavior",null,CoordinateLayoutActivity.class));
-        list.add(new ModuleViewBean(null, "test1",null,null));
+        list.add(new ModuleViewBean(null, "探探view",null,null));
         list.add(new ModuleViewBean(null, "test2",null,null));
         m_moduleView.showRecycelerView(getActivity(), list, new SimpleDataAdapter(getActivity()));
     }

@@ -282,7 +282,7 @@ public class ImportantFragment extends BaseFragment implements Consts, SwipeRefr
 
 //                        alertTip();
 
-                        notice();
+//                        notice();
                     }
 
                     @Override
