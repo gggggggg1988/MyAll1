@@ -15,7 +15,7 @@ public class CardViewCallBack extends ItemTouchHelper.SimpleCallback {
     private final TanTanViewAdapter adapter;
     private List<TanTanViewBean> datas;
     public CardViewCallBack(RecyclerView recyclerView, TanTanViewAdapter adapter, List<TanTanViewBean> data) {
-        super(0, ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT);
+        super(0, ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT);//控制可以往哪个方向拖动删除
         this.recyclerview = recyclerView;
         this.adapter = adapter;
         this.datas = data;

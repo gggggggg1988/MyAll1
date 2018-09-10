@@ -22,7 +22,7 @@ public class SwipeCardLayoutManager extends RecyclerView.LayoutManager {
             addView(view);
             measureChild(view,0,0);
             int widthSpace = getWidth() - getDecoratedMeasuredWidth(view);
-            int heightSpace = getHeight() - getDecoratedMeasuredHeight(view);
+            int heightSpace = getHeight() - getDecoratedMeasuredHeight(view);//考虑间隔线的宽度
             layoutDecorated(view,widthSpace/2,heightSpace/2,widthSpace/2+getDecoratedMeasuredWidth(view),heightSpace/2+getDecoratedMeasuredHeight(view));
             int level = itemCount-i-1;
            if (level>0) {
