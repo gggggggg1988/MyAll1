@@ -23,7 +23,7 @@ android {
     }
 
     configurations {
-        all*.exclude  module: 'PhotoView'  //去除重复依赖库
+        all*.exclude module: 'PhotoView'  //去除重复依赖库
     }
 
     dataBinding {
@@ -151,7 +151,7 @@ dependencies {
     compile 'org.glassfish:javax.annotation:10.0-b28'
     compile files('libs/easypermissions.jar')
     compile files('libs/calligraphy-2.2.0.jar')
-   // compile files('libs/logger-orhanobut-2.1.1.jar')
+    // compile files('libs/logger-orhanobut-2.1.1.jar')
     compile files('libs/joda-time-2.9.3-no-tzdb.jar')
 
     // badge

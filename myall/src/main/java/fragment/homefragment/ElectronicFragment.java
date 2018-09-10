@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import fragment.BaseFragment;
 import fragment.homefragment.activitys.CoordinateLayoutActivity;
+import fragment.homefragment.activitys.TanTanView;
 import fragment.homefragment.adapter.SimpleDataAdapter;
 import ndkjnidemo.wobiancao.com.mylibrary.recyclerview.moduleView.ModuleView;
 import ndkjnidemo.wobiancao.com.mylibrary.recyclerview.moduleView.ModuleViewBean;
@@ -40,7 +41,7 @@ public class ElectronicFragment extends BaseFragment {
         m_moduleView.isShowTitle(false);
         list = new ArrayList<>();
         list.add(new ModuleViewBean(null, "CoordinateLayout Behavior",null,CoordinateLayoutActivity.class));
-        list.add(new ModuleViewBean(null, "探探view",null,null));
+        list.add(new ModuleViewBean(null, "探探view",null, TanTanView.class));
         list.add(new ModuleViewBean(null, "test2",null,null));
         m_moduleView.showRecycelerView(getActivity(), list, new SimpleDataAdapter(getActivity()));
     }

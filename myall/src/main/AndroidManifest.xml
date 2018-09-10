@@ -86,7 +86,7 @@
                 android:name="android.app.default_searchable"
                 android:value="com.example.administrator.myall.activitys.SearchResultAct"/>
         </activity>
-        <activity android:name=".activitys.MVPtest"></activity>
+        <activity android:name=".activitys.MVPtest"/>
         <activity android:name=".MutilTouchActivity">
         </activity>
         <activity android:name=".Multi2">
@@ -196,6 +196,8 @@
             android:name="fragment.homefragment.activitys.CoordinateLayoutActivity"
             android:label="@string/title_activity_coordinate_layout"
             android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name="fragment.homefragment.activitys.TanTanView">
         </activity>
     </application>
 
